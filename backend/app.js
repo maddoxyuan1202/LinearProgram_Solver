@@ -55,7 +55,7 @@ async function handleGet(req, res, query) {
   let model;
 
   console.log("query: ", query);
-  console.log(query.model);
+  //console.log(query.model);
   // If there was a query (a query string was sent)
   if (
     query !== undefined &&
