@@ -110,26 +110,15 @@ async function handleGet(req, res, query) {
   let error = "NO_ERROR";
   let output_lp;
 
-<<<<<<< Updated upstream
   console.log("query: ", query);
   console.log(JSON.stringify(query.model));
-=======
-  //console.log("query: ", query);
->>>>>>> Stashed changes
   // If there was a query (a query string was sent)
   if (
     query !== undefined &&
     query.model !== undefined
   ) {
-<<<<<<< Updated upstream
-    // Convert min_value and max_value from String to integer
-    model_get = JSON.parse(query.model);
-    
-    // Generate a random number
-=======
     let model_get = JSON.parse(query.model);
     console.log(model_get);
->>>>>>> Stashed changes
     output_lp = LinearProgramming(model_get, solver);
     console.log("Via http get method, output is: ", output_lp);
   } else {
