@@ -28,15 +28,14 @@
         <div class="panel panel-info">
           <div class="panel-heading">
             <div class="panel-title">
-              I'm a true random generator!
+              Linear Programming Solver for 2 variables!
             </div>
           </div>
 
           <div>
             <div>
-              <span>Select the min and max values.</span>
-
-              <div>
+              <span>Select optimize type and constraints</span>
+              <!-- <div>
                 <input
                   type="number"
                   name="min_value"
@@ -49,9 +48,54 @@
                   id="max_value"
                   placeholder="max value"
                 />
+              </div> -->
+              <div>
+                <label for="optimize">Choose Optimize:</label>
+                <select id="optimize">
+                  <option value="max">Max</option>
+                  <option value="min">Min</option>
+                </select>
               </div>
               <div>
-                
+                <label for="objective_func">Objective Function:</label>
+                <input 
+                  type="text"
+                  name="objective_func"
+                  id="objective_func"
+                  placeholder="objective"
+                />
+              </div>
+              <div>
+                <label for="subject_to_1">Subject To: </label>
+                <input
+                  type="text"
+                  name="subject_to_1"
+                  id="subject_to_1"
+                  placeholder="constraint 1"
+                />
+
+                <input
+                  type="text"
+                  name="subject_to_2"
+                  id="subject_to_2"
+                  placeholder="constraint 2"
+                />
+
+                <input
+                  type="text"
+                  name="subject_to_3"
+                  id="subject_to_3"
+                  placeholder="constraint 3"
+                />
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  name="integer_solution"
+                  id="integer_solution"
+                  placeholder="integer solution"
+                />
+                <span>Return integer result only</span>
               </div>
             </div>
             <div class="text-center padding-y-sm btn-lg btn-block">
@@ -69,7 +113,7 @@
               <span class="loader text-center" id="loader"></span>
 
               <!-- ** show random value here. We modify the text in this span through javascript! ** -->
-              <span id="random-value"></span>
+              <span id="result_by_lp_solver"></span>
             </div>
           </div>
         </div>
