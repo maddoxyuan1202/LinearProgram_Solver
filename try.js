@@ -7,6 +7,8 @@ const solver = require("javascript-lp-solver");
 function LinearProgramming(model, solver) {
     return solver.Solve(model);
   }
+  // find the max of 3x + y
+  // 
   let model = {
     "optimize": "maximize",
     "opType": "max",
