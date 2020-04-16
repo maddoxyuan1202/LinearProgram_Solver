@@ -52,20 +52,33 @@ async function submit() {
     let integer_solution = document.getElementById("integer_solution").value;
 
     //处理字符串 -> object
+    function input_to_json(objective, subject1, subject2, subject3, max_or_min, integer_solution){
+      return input_json;
+    }
+    // let input_json = input_to_json(objective, subject1, subject2, subject3, max_or_min, integer_solution);
+    let input_json = {
+      optimize: 'maximize',
+      opType: 'max',
+      constraints: { c1: { max: 4 }, c2: { max: 12 }, c3: { max: 3 } },
+      variables: {
+        x: { maximize: 3, c1: 2, c2: 2, c3: 0 },
+        y: { maximize: 1, c1: -1, c2: 3, c3: 1 }
+      }
+    };
+    input_json = JSON.stringify(input_json);
+    console.log(input_json);
+    let request_get = `http://127.0.0.1:5000/?model=${input_json}`;
+    //let request_post = `http://127.0.0.1:5000/upload`;
+    console.log("request via HTTP GET method: ", request_get);
 
 
-    //let request = `http://127.0.0.1:5000/?min_value=${min_value}&max_value=${max_value}`;
-    let request = `http://127.0.0.1:5000/upload`
-    console.log("request: ", request);
     // Send an HTTP GET request to the backend
-  
-    const data = await axios.get(request);
-
-    console.log("data.data: ", JSON.stringify(data.data, null, 2));
+    const data = await axios.get(request_get);
+    console.log(data);
     
-
     // Display the random value
-    random_value_element.innerHTML = "Here is your random number: " + data.data.randomValue;
+    solution_lp.innerHTML = "Here is your solution: " + JSON.stringify(data.data.output_lp);
+    
   } catch (error) {
     console.log("error: ", error);
   }

@@ -133,7 +133,7 @@ async function handleGet(req, res, query) {
   // Convert output to string
   let outputString = JSON.stringify(output, null, 2);
   console.log("outputString: ", outputString);
-
+  console.log(typeof outputString);
   // Let's generate some artificial delay!
   await delay(1000);
   // Send it back to the frontend.
