@@ -1,9 +1,11 @@
 /**
- * Set the initial values of min_value and max_value
+ * Set the initial values of linear programming functions
  */
 function initialize() {
-  document.getElementById("min_value").value = "0";
-  document.getElementById("max_value").value = "100";
+  document.getElementById("objective_func").value = "3x + y";
+  document.getElementById("subject_to_1").value = "2x - y <= 4";
+  document.getElementById("subject_to_2").value = "2x + 3y <= 12";
+  document.getElementById("subject_to_3").value = "y <= 3";
 
   let loader = document.getElementById("loader");
   loader.style.display = "none";
@@ -29,9 +31,9 @@ async function submit() {
   document.body.style.cursor = "wait";
 
   // Accessing the div that has random value 
-  let random_value_element = document.getElementById("random-value");
+  let solution_lp = document.getElementById("result_by_lp_solver");
 
-  random_value_element.innerHTML = "Please wait...";
+  solution_lp.innerHTML = "Please wait...";
   
   // Show the loader element (spinning wheels)
   let loader = document.getElementById("loader");
@@ -39,21 +41,44 @@ async function submit() {
 
   try {
     // Get the min/max values from the user 
-    let min_value = document.getElementById("min_value").value;
-    let max_value = document.getElementById("max_value").value;
+    //let min_value = document.getElementById("min_value").value;
+    //let max_value = document.getElementById("max_value").value;
+    
+    let objective = document.getElementById("objective_func").value;
+    let subject1 = document.getElementById("subject_to_1").value;
+    let subject2 = document.getElementById("subject_to_2").value;
+    let subject3 = document.getElementById("subject_to_3").value;
+    let max_or_min = document.getElementById("optimize").value;
+    let integer_solution = document.getElementById("integer_solution").value;
 
+    //处理字符串 -> object
+    function input_to_json(objective, subject1, subject2, subject3, max_or_min, integer_solution){
+      return input_json;
+    }
+    // let input_json = input_to_json(objective, subject1, subject2, subject3, max_or_min, integer_solution);
+    let input_json = {
+      optimize: 'maximize',
+      opType: 'max',
+      constraints: { c1: { max: 4 }, c2: { max: 12 }, c3: { max: 3 } },
+      variables: {
+        x: { maximize: 3, c1: 2, c2: 2, c3: 0 },
+        y: { maximize: 1, c1: -1, c2: 3, c3: 1 }
+      }
+    };
+    input_json = JSON.stringify(input_json);
+    console.log(input_json);
+    let request_get = `http://127.0.0.1:5000/?model=${input_json}`;
+    //let request_post = `http://127.0.0.1:5000/upload`;
+    console.log("request via HTTP GET method: ", request_get);
 
-    let request = `http://127.0.0.1:5000/?min_value=${min_value}&max_value=${max_value}`;
-    console.log("request: ", request);
 
     // Send an HTTP GET request to the backend
-    const data = await axios.get(request);
-
-    console.log("data.data: ", JSON.stringify(data.data, null, 2));
+    const data = await axios.get(request_get);
+    console.log(data);
     
-
     // Display the random value
-    random_value_element.innerHTML = "Here is your random number: " + data.data.randomValue;
+    solution_lp.innerHTML = "Here is your solution: " + JSON.stringify(data.data.output_lp);
+    
   } catch (error) {
     console.log("error: ", error);
   }
