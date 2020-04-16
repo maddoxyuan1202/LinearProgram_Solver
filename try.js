@@ -30,8 +30,8 @@ function LinearProgramming(model, solver) {
             "c2": 3,
             "c3": 1
         }
-    },
-};
+    }
+}
   let output = LinearProgramming(model, solver);
   let outputString = JSON.stringify(output, null, 2);
   
