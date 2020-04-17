@@ -68,16 +68,18 @@ async function submit() {
     input_json = JSON.stringify(input_json);
     console.log(input_json);
     let request_get = `http://127.0.0.1:5000/?model=${input_json}`;
-    //let request_post = `http://127.0.0.1:5000/upload`;
-    console.log("request via HTTP GET method: ", request_get);
+    let request_post = `http://127.0.0.1:5000/upload`;
+    //console.log("request via HTTP GET method: ", request_get);
+    console.log("request via HTTP POST method: ", request_post);
+
 
 
     // Send an HTTP GET request to the backend
-    const data = await axios.get(request_get);
-    console.log(data);
-    
-    // Display the random value
-    solution_lp.innerHTML = "Here is your solution: " + JSON.stringify(data.data.output_lp);
+    //const data = await axios.get(request_get);
+    //console.log(data);
+    const data1 = await axios.post(request_post, input_json);
+    console.log(data1);
+    solution_lp.innerHTML = "Here is your solution: " + JSON.stringify(data1.data.output_lp);
     
   } catch (error) {
     console.log("error: ", error);

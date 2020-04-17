@@ -56,8 +56,87 @@ app.post("/upload", async function(req, res){
   let error = "NO_ERROR";
   let output_lp;
   let output;
+  console.log("req", req);
+  //console.log("req.samplefile:", req.files.sampleFile);
+  //console.log(JSON.parse(req.files.sampleFile.data));
+//   try{
+//     if(!req.files){
+//       res.send({
+//         status: false,
+//         message: "No file is uploaded"
+//       });
+//     }else{
+//       if(req.files !== undefined){
+        
+//         let model_post = req.files.sampleFile;
+//         model_post.mv("./uploads/" + model_post.name);
+//         let input = JSON.parse(model_post.data);
+//         //const input_json = require(`../backend/uploads/${model_post.name}`);
+//         output_lp = LinearProgramming(input, solver);
+//         console.log(output_lp);
+//       }else{error = "ERROR: uploaded file isn't in JSON type";}
 
-  console.log("req.samplefile:", req.files.sampleFile);
+//       output = {
+//         status: true,
+//         message: "File is uploaded",
+//         output_lp: output_lp,
+//         error: error
+//       };
+      
+//       let outputString = JSON.stringify(output, null, 2);
+//       console.log("outputString: ", outputString);
+
+//       await delay(1000);
+      
+//       res.send(output);
+//     }
+//   }catch(err){
+//     res.status(404).send(err);
+//     console.log("error in app post:", err);
+//   }
+// })
+try{  
+    if(req.body !== undefined){
+      
+      let model_post = req.body;
+      console.log("model_post", typeof model_post);
+      //model_post.mv("./uploads/" + model_post.name);
+      console.log("model_post is ", model_post);
+      let input = JSON.parse(Object.keys(model_post));
+      console.log("input", input);
+      //const input_json = require(`../backend/uploads/${model_post.name}`);
+      output_lp = LinearProgramming(input, solver);
+      console.log(output_lp);
+    }else{error = "ERROR: uploaded INFO isn't in JSON type";}
+
+    output = {
+      status: true,
+      message: "JSON is uploaded",
+      output_lp: output_lp,
+      error: error
+    };
+    
+    let outputString = JSON.stringify(output, null, 2);
+    console.log("outputString: ", outputString);
+
+    await delay(1000);
+    
+    res.send(output);
+
+}catch(err){
+  res.status(404).send(err);
+  console.log("error in app post:", err);
+}
+})
+
+
+app.post("/glpk", async function(req, res){
+
+  let error = "NO_ERROR";
+  let output_lp;
+  let output;
+  console.log("req", req);
+  //console.log("req.samplefile:", req.files.sampleFile);
   //console.log(JSON.parse(req.files.sampleFile.data));
   try{
     if(!req.files){
@@ -95,6 +174,7 @@ app.post("/upload", async function(req, res){
     console.log("error in app post:", err);
   }
 })
+
 
 app.listen(port, err => {
   console.log(`Listening on port: ${port}`);
@@ -142,3 +222,15 @@ async function handleGet(req, res, query) {
   // Send it back to the frontend.
   res.send(outputString);
 }
+
+
+require('shelljs/global');
+
+// Sync call to exec()
+var version = exec('node --version', {silent:true}).output;
+
+// Async call to exec()
+exec('glpsol --cuts --fpump --mipgap 0.001 --model glpk_example/problem.mod -o glpk_example/temp.txt', function(status, output) {
+  console.log('Exit status:', status);
+  console.log('Program output:', output);
+});
