@@ -24,7 +24,7 @@ app.use(bodyparser.urlencoded({extended: true}));
 app.use(morgan("dev"));
 
 
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 /**
  * Solve the model by jsLPSolver
@@ -117,8 +117,7 @@ async function handleGet(req, res, query) {
     query !== undefined &&
     query.model !== undefined
   ) {
-    let model_get = JSON.parse(query.model);
-    console.log(model_get);
+    //console.log(model_get);
     // Convert min_value and max_value from String to integer
     let model_get = JSON.parse(query.model);
     
@@ -137,7 +136,7 @@ async function handleGet(req, res, query) {
   // Convert output to string
   let outputString = JSON.stringify(output, null, 2);
   console.log("outputString: ", outputString);
-  console.log(typeof outputString);
+  // console.log(typeof outputString);
   // Let's generate some artificial delay!
   await delay(1000);
   // Send it back to the frontend.
