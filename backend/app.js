@@ -57,6 +57,8 @@ app.post("/upload", async function(req, res){
   let output_lp;
   let output;
   console.log("req", req);
+
+// 上传文档时的写法，已放弃
   //console.log("req.samplefile:", req.files.sampleFile);
   //console.log(JSON.parse(req.files.sampleFile.data));
 //   try{
@@ -100,6 +102,8 @@ try{
       
       let model_post = req.body;
       console.log("model_post", typeof model_post);
+      // Store user history to local envirnoment 
+      
       //model_post.mv("./uploads/" + model_post.name);
       console.log("model_post is ", model_post);
       let input = JSON.parse(Object.keys(model_post));
