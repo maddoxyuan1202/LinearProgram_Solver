@@ -1,3 +1,29 @@
+function openLP(evt, choose_solver) {
+  // Declare all variables
+  let i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(choose_solver).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+let re=new RegExp('a','i'); //忽略大小写
+let re1 = /a/g;
+let str = 'asdf 3da 232 32';
+console.log(str.replace(re1, '0'));
+
 /**
  * Set the initial values of linear programming functions
  */
@@ -6,6 +32,7 @@ function initialize() {
   document.getElementById("subject_to_1").value = "2x - y <= 4";
   document.getElementById("subject_to_2").value = "2x + 3y <= 12";
   document.getElementById("subject_to_3").value = "y <= 3";
+  document.getElementById("varibales").value = "x y";
 
   let loader = document.getElementById("loader");
   loader.style.display = "none";

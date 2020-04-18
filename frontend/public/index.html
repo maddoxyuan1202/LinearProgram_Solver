@@ -16,9 +16,14 @@
 
     <!-- Loading axios library necessary for making HTTP GET requests -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Random Generator</title>
+    <title>Linear Programming Solver</title>
   </head>
   <body>
+    <div class="topnav">
+      <a class="active" href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#login">Log In / Sign Up</a>
+    </div>
     <div class="container">
       <div
         id="loginbox"
@@ -28,27 +33,16 @@
         <div class="panel panel-info">
           <div class="panel-heading">
             <div class="panel-title">
-              Linear Programming Solver for 2 variables!
+              Linear Programming Solver
             </div>
           </div>
-
-          <div>
-            <div>
-              <span>Select optimize type and constraints</span>
-              <!-- <div>
-                <input
-                  type="number"
-                  name="min_value"
-                  id="min_value"
-                  placeholder="min value"
-                />
-                <input
-                  type="number"
-                  name="max_value"
-                  id="max_value"
-                  placeholder="max value"
-                />
-              </div> -->
+          <span>Select Backend Solver: GLPK(C++) / Lp-solver(Node.js) </span>
+          <div class="tab">
+            <button class="tablinks" onclick="openLP(event, 'Lp-solver')">Lp-solver</button>
+            <button class="tablinks" onclick="openLP(event, 'GLPK')">GLPK</button>
+          </div>
+            <div id="Lp-solver" class="tabcontent">
+               
               <div>
                 <label for="optimize">Choose Optimize:</label>
                 <select id="optimize">
@@ -56,6 +50,16 @@
                   <option value="min">Min</option>
                 </select>
               </div>
+              <div>
+                <label for="varibales">Variables (split by a sapce)</label>
+                <input 
+                  type="text"
+                  name="varibales"
+                  id="varibales"
+                  placeholder="put variables"
+                />
+              </div>
+
               <div>
                 <label for="objective_func">Objective Function:</label>
                 <input 
@@ -66,7 +70,7 @@
                 />
               </div>
               <div>
-                <label for="subject_to_1">Subject To: </label>
+                <label for="subject_to_1">Subject To: (if you don't use less constraints, keep it plain) </label><br>
                 <input
                   type="text"
                   name="subject_to_1"
@@ -79,7 +83,7 @@
                   name="subject_to_2"
                   id="subject_to_2"
                   placeholder="constraint 2"
-                />
+                /><br>
 
                 <input
                   type="text"
@@ -87,6 +91,13 @@
                   id="subject_to_3"
                   placeholder="constraint 3"
                 />
+
+                <input
+                  type="text"
+                  name="subject_to_4"
+                  id="subject_to_4"
+                  placeholder="constraint 4"
+                /><br>
               </div>
               <div>
                 <input
@@ -98,6 +109,18 @@
                 <span>Return integer result only</span>
               </div>
             </div>
+
+            <div id="GLPK" class="tabcontent">
+               
+              <div>
+                <label for="input_glpk">Mathprog:</label><br>
+                <textarea id="input_glpk" rows="10" cols="60">
+                </textarea>
+
+              </div>
+              
+            </div>
+
             <div class="text-center padding-y-sm btn-lg btn-block">
               <input
                 type="submit"
@@ -115,7 +138,6 @@
               <!-- ** show random value here. We modify the text in this span through javascript! ** -->
               <span id="result_by_lp_solver"></span>
             </div>
-          </div>
         </div>
       </div>
     </div>
