@@ -1,147 +1,108 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Loading bootstrap css file to format our html -->
-    <link
-      href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
-      rel="stylesheet"
-      id="bootstrap-css"
-    />
-    <!-- Loading our own styles which is an animation for spinning wheels indicating waiting time -->
-    <link href="style.css" rel="stylesheet" id="bootstrap-css" />
 
-    <!-- Loading bootstrap css file to format our html -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<head>
+  <!-- Loading bootstrap css file to format our html -->
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+  <!-- Loading our own styles which is an animation for spinning wheels indicating waiting time -->
+  <link href="style.css" rel="stylesheet" id="bootstrap-css" />
 
-    <!-- Loading axios library necessary for making HTTP GET requests -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Linear Programming Solver</title>
-  </head>
-  <body>
-    <div class="topnav">
-      <a class="active" href="#home">Home</a>
-      <a href="#about">About Us</a>
-      <a href="#login">Log In / Sign Up</a>
-    </div>
-    <div class="container">
-      <div
-        id="loginbox"
-        style="margin-top: 50px;"
-        class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"
-      >
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <div class="panel-title">
-              Linear Programming Solver
-            </div>
+  <!-- Loading bootstrap css file to format our html -->
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <!-- Loading axios library necessary for making HTTP GET requests -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>Linear Programming Solver</title>
+</head>
+
+<body>
+  <div class="topnav">
+    <a class="active" href="">Home</a>
+    <a href="#about">About Us</a>
+    <a href="#login">Log In / Sign Up</a>
+  </div>
+  <div class="container">
+    <div id="loginbox" style="margin-top: 50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div class="panel-title">
+            Linear Programming Solver
           </div>
-          <span>Select Backend Solver: GLPK(C++) / Lp-solver(Node.js) </span>
-          <div class="tab">
-            <button class="tablinks" onclick="openLP(event, 'Lp-solver')">Lp-solver</button>
-            <button class="tablinks" onclick="openLP(event, 'GLPK')">GLPK</button>
-          </div>
-            <div id="Lp-solver" class="tabcontent">
-               
-              <div>
-                <label for="optimize">Choose Optimize:</label>
-                <select id="optimize">
-                  <option value="max">Max</option>
-                  <option value="min">Min</option>
-                </select>
-              </div>
-              <div>
-                <label for="varibales">Variables (split by a sapce)</label>
-                <input 
-                  type="text"
-                  name="varibales"
-                  id="varibales"
-                  placeholder="put variables"
-                />
-              </div>
-
-              <div>
-                <label for="objective_func">Objective Function:</label>
-                <input 
-                  type="text"
-                  name="objective_func"
-                  id="objective_func"
-                  placeholder="objective"
-                />
-              </div>
-              <div>
-                <label for="subject_to_1">Subject To: (if you don't use less constraints, keep it plain) </label><br>
-                <input
-                  type="text"
-                  name="subject_to_1"
-                  id="subject_to_1"
-                  placeholder="constraint 1"
-                />
-
-                <input
-                  type="text"
-                  name="subject_to_2"
-                  id="subject_to_2"
-                  placeholder="constraint 2"
-                /><br>
-
-                <input
-                  type="text"
-                  name="subject_to_3"
-                  id="subject_to_3"
-                  placeholder="constraint 3"
-                />
-
-                <input
-                  type="text"
-                  name="subject_to_4"
-                  id="subject_to_4"
-                  placeholder="constraint 4"
-                /><br>
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  name="integer_solution"
-                  id="integer_solution"
-                  placeholder="integer solution"
-                />
-                <span>Return integer result only</span>
-              </div>
-            </div>
-
-            <div id="GLPK" class="tabcontent">
-               
-              <div>
-                <label for="input_glpk">Mathprog:</label><br>
-                <textarea id="input_glpk" rows="10" cols="60">
-                </textarea>
-
-              </div>
-              
-            </div>
-
-            <div class="text-center padding-y-sm btn-lg btn-block">
-              <input
-                type="submit"
-                name="submit"
-                id="submit"
-                value="Generate!"
-                class="btn btn-primary mt-8"
-                onclick="submit()"
-              />
-            </div>
-
-            <div class="text-center padding-y-sm btn-lg btn-block">
-              <span class="loader text-center" id="loader"></span>
-
-              <!-- ** show random value here. We modify the text in this span through javascript! ** -->
-              <span id="result_by_lp_solver"></span>
-            </div>
         </div>
+        <span>Select Backend Solver: GLPK(C++) / Lp-solver(Node.js) </span>
+        <div class="tab">
+          <button class="tablinks" onclick="openLP(event, 'Lp-solver')">Lp-solver</button>
+          <button class="tablinks" onclick="openLP(event, 'GLPK')">GLPK</button>
+        </div>
+        <div id="Lp-solver" class="tabcontent">
+
+
+          <label for="optimize">Choose Optimize:</label>
+          <select id="optimize">
+            <option value="max">Max</option>
+            <option value="min">Min</option>
+          </select>
+
+          <div>
+            <label for="varibales">Variables (split by a sapce)</label>
+            <input type="text" name="varibales" id="varibales" placeholder="put variables" />
+          </div>
+
+          <div>
+            <label for="objective_func">Objective Function:</label>
+            <input type="text" name="objective_func" id="objective_func" placeholder="objective" />
+          </div>
+          <div>
+            <label for="subject_to_1">Subject To: (if you don't use less constraints, keep it plain) </label><br>
+            <input type="text" name="subject_to_1" id="subject_to_1" placeholder="constraint 1" />
+
+            <input type="text" name="subject_to_2" id="subject_to_2" placeholder="constraint 2" /><br>
+
+            <input type="text" name="subject_to_3" id="subject_to_3" placeholder="constraint 3" />
+
+            <input type="text" name="subject_to_4" id="subject_to_4" placeholder="constraint 4" /><br>
+
+            <input type="text" name="subject_to_5" id="subject_to_5" placeholder="constraint 5" />
+
+            <input type="text" name="subject_to_6" id="subject_to_6" placeholder="constraint 6" /><br>
+          </div>
+          <div>
+            <input type="checkbox" name="integer_solution" id="integer_solution" placeholder="integer solution" />
+            <span>Return integer result only</span>
+          </div>
+
+          <div class="text-center padding-y-sm btn-lg btn-block">
+            <input type="submit" name="submit_lp" id="submit_lp" value="Generate By Lp Solver!"
+              class="btn btn-primary mt-8" onclick="submit_lp()" />
+          </div>
+        </div>
+        <div id="GLPK" class="tabcontent">
+
+          <div>
+            <label for="input_glpk">Mathprog:</label><br>
+            <textarea id="input_glpk" rows="10" cols="60">
+              </textarea>
+
+          </div>
+          <div class="text-center padding-y-sm btn-lg btn-block">
+            <input type="submit" name="submit_glpk" id="submit_glpk" value="Generate By GLPK!"
+              class="btn btn-primary mt-8" onclick="submit()" />
+          </div>
+
+          <div class="text-center padding-y-sm btn-lg btn-block">
+            <span class="loader text-center" id="loader"></span>
+
+            <!-- ** show random value here. We modify the text in this span through javascript! ** -->
+            <span id="result_by_lp_solver"></span>
+          </div>
+        </div>
+
       </div>
     </div>
-  </body>
-  <!-- Use script.js to handle events on this page -->
-  <script type="text/javascript" src="script.js"></script>
+  </div>
+</body>
+<!-- Use script.js to handle events on this page -->
+<script type="text/javascript" src="script.js"></script>
+
 </html>

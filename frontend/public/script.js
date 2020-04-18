@@ -33,6 +33,8 @@ function initialize() {
   document.getElementById("subject_to_2").value = "2x + 3y <= 12";
   document.getElementById("subject_to_3").value = "y <= 3";
   document.getElementById("varibales").value = "x y";
+  document.getElementById("input_glpk").value = 
+  "var x1;\nvar x2;\nmaximize obj: 0.6 * x1 + 0.5 * x2;\ns.t. c1: x1 + 2 * x2 <= 1;\ns.t. c2: 3 * x1 + x2 <= 2;\nsolve;\ndisplay x1, x2;\nend;";
 
   let loader = document.getElementById("loader");
   loader.style.display = "none";
@@ -44,14 +46,18 @@ initialize();
 /**
  * Handle the click event on Submit (Generate) button
  */
-document.getElementById("submit").onclick = function() {
-  submit();
+document.getElementById("submit_lp").onclick = function() {
+  submit_lpsolver();
 };
+
+document.getElementById("submit_lpsolver").onclick = function(){
+  submit_glpk();
+}
 
 /**
  * An async function to send the request to the backend.
  */
-async function submit() {
+async function submit_lpsolver() {
   console.log("In submit!");
 
   // Set the mouse cursor to hourglass
@@ -67,10 +73,7 @@ async function submit() {
   loader.style.display = "inline-block";
 
   try {
-    // Get the min/max values from the user 
-    //let min_value = document.getElementById("min_value").value;
-    //let max_value = document.getElementById("max_value").value;
-    
+        
     let objective = document.getElementById("objective_func").value;
     let subject1 = document.getElementById("subject_to_1").value;
     let subject2 = document.getElementById("subject_to_2").value;
