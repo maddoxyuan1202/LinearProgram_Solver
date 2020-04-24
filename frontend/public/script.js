@@ -58,6 +58,9 @@ document.getElementById("submit_lp").onclick = function() {
 };
 
 document.getElementById("submit_lpsolver").onclick = function(){
+  submit_lpsolver();
+}
+document.getElementById("submit_glpk").onclick = function(){
   submit_glpk();
 }
 
@@ -117,7 +120,7 @@ async function submit_lpsolver() {
   input_json.variables={
     'x': {'z': obj_1, 'c1': sub_1_1, 'c2': sub_2_1, 'c3': sub_3_1, 'c4': sub_4_1, 'c5':sub_5_1},
     'y': {'z': obj_2, 'c1': sub_1_2, 'c2': sub_2_2, 'c3': sub_3_2, 'c4': sub_4_2, 'c5':sub_5_2}};
-  if(integer === "integer_solution"){
+  if(integer === "integer"){
     input_json.ints = {'x': 1, 'y': 1};
   }
   input_json = JSON.stringify(input_json);
@@ -157,6 +160,51 @@ async function submit_lpsolver() {
   // Set the cursor back to default
   document.body.style.cursor = "default";
 
+  // Hide loader animation
+  loader.style.display = "none";
+}
+
+
+async function submit_glpk() {
+  console.log("In submit!");
+
+  // Set the mouse cursor to hourglass
+  document.body.style.cursor = "wait";
+
+  // Accessing the div that has random value 
+  let solution_glpk = document.getElementById("solution_glpk");
+
+  solution_glpk.innerHTML = "Please wait...";
+
+  // Show the loader element (spinning wheels)
+  let loader = document.getElementById("loader");
+  loader.style.display = "inline-block";
+
+  try {
+    let content = {
+      input_1 : document.getElementById("input_glpk").value};
+
+    console.log("input_glpk:"+content);
+
+
+    //let request_get = `http://127.0.0.1:5000/?model=${input_json}`;
+    //console.log("request via HTTP GET method: ", request_get);
+    let request_post = `http://127.0.0.1:5000/glpk`;
+    console.log("request via HTTP POST method: ", request_post);
+
+
+    // Send an HTTP GET request to the backend
+    //const data = await axios.get(request_get);
+    //console.log(data);
+
+    // Send an HTTP Post request to the backend
+    const data1 = await axios.post(request_post, content);
+    console.log(data1);
+    solution_glpk.innerHTML = data1.data.output_lp;
+
+  } catch (error) {
+    console.log("error: ", error);
+  }
   // Hide loader animation
   loader.style.display = "none";
 }
