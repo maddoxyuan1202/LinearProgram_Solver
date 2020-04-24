@@ -1,3 +1,4 @@
+// unused functions or tests, will delete later
 "use strict";
 const solver = require("javascript-lp-solver");
 /**
@@ -108,26 +109,26 @@ function LinearProgramming(model, solver) {
 
 
 
-  // function input_to_json(variables, obj, sub1, sub2, sub3, sub4, sub5, sub6, max_or_min, integer){
+  function input_to_json(variables, obj, sub1, sub2, sub3, sub4, sub5, sub6, max_or_min, integer){
 
-  //   let obj = check_string(obj, variables);
-  //   let sub1 = check_string(sub1, variables);
-  //   let sub2 = check_string(sub2, variables);
-  //   let sub3 = check_string(sub3, variables);
-  //   let sub4 = check_string(sub4, variables);
-  //   let sub5 = check_string(sub5, variables);
-  //   let sub6 = check_string(sub6, variables);
-  //   let name = [variables, obj, sub1, sub2, sub3, sub4, sub5, sub6];
+    let obj = check_string(obj, variables);
+    let sub1 = check_string(sub1, variables);
+    let sub2 = check_string(sub2, variables);
+    let sub3 = check_string(sub3, variables);
+    let sub4 = check_string(sub4, variables);
+    let sub5 = check_string(sub5, variables);
+    let sub6 = check_string(sub6, variables);
+    let name = [variables, obj, sub1, sub2, sub3, sub4, sub5, sub6];
     
-  //   //write JSON
-  //   let input_json = {};
-  //   input_json.opType = max_or_min;
-  //   if(max_or_min === 'max'){
-  //     input_json.optimize = "Maximize";
-  //   }
-  //   else{
-  //     input_json.optimize = "Minimize"
-  //   }
+    //write JSON
+    let input_json = {};
+    input_json.opType = max_or_min;
+    if(max_or_min === 'max'){
+      input_json.optimize = "Maximize";
+    }
+    else{
+      input_json.optimize = "Minimize"
+    }
   
-  //   return input_json;
-  // }
+    return input_json;
+  }
