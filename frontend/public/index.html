@@ -32,7 +32,7 @@
         </div>
         <span>Select Backend Solver: GLPK(C++) / Lp-solver(Node.js) </span>
         <div class="tab">
-          <button class="tablinks" onclick="openLP(event, 'Lp-solver')">Lp-solver</button>
+          <button class="tablinks" onclick="openLP(event, 'Lp-solver')">Lp-solver(two variables)</button>
           <button class="tablinks" onclick="openLP(event, 'GLPK')">GLPK</button>
         </div>
         <div id="Lp-solver" class="tabcontent">
@@ -43,31 +43,86 @@
             <option value="max">Max</option>
             <option value="min">Min</option>
           </select>
-
-          <div>
+            
+          <!-- <div>
             <label for="varibales">Variables (split by a sapce)</label>
             <input type="text" name="varibales" id="varibales" placeholder="put variables" />
-          </div>
+          </div> -->
 
           <div>
             <label for="objective_func">Objective Function:</label>
-            <input type="text" name="objective_func" id="objective_func" placeholder="objective" />
+            <span>z=</span>
+            <input type="number" name="obj_1" id="obj_1" style="width: 50px;height:20px" value="0"/>
+            <span>x+</span>
+            <input type="number" name="obj_2" id="obj_2"style="width: 50px;height:20px"value="0"/>
+            <span>y</span>
+            
           </div>
           <div>
-            <label for="subject_to_1">Subject To: (if you don't use less constraints, keep it plain) </label><br>
-            <input type="text" name="subject_to_1" id="subject_to_1" placeholder="constraint 1" />
+            <label for="subject_to">Subject To: (if you don't use some constraints, keep it plain) </label><br>
+            <input type="number" name="sub_1_1" id="sub_1_1"style="width: 50px;height:20px"value="0"/>
+            <span>x+</span>
+            <input type="number" name="sub_1_2" id="sub_1_2"style="width: 50px;height:20px"value="0"/>
+            <span>y</span>
+            <select id="sub_1_op">
+              <option value="max">>=</option>
+              <option value="min"><=</option>
+              <option value="equal">=</option>
+            </select>
+            <input type="number" name="sub_1_3" id="sub_1_3"style="width: 50px;height:20px"value="0"/>
+            <br>
 
-            <input type="text" name="subject_to_2" id="subject_to_2" placeholder="constraint 2" /><br>
+            <input type="number" name="sub_2_1" id="sub_2_1"style="width: 50px;height:20px"value="0"/>
+            <span>x+</span>
+            <input type="number" name="sub_2_2" id="sub_2_2"style="width: 50px;height:20px"value="0"/>
+            <span>y</span>
+            <select id="sub_2_op">
+              <option value="max">>=</option>
+              <option value="min"><=</option>
+              <option value="equal">=</option>
+            </select>
+            <input type="number" name="sub_2_3" id="sub_2_3"style="width: 50px;height:20px"value="0"/>
+            <br>
+            
+            <input type="number" name="sub_3_1" id="sub_3_1"style="width: 50px;height:20px"value="0"/>
+            <span>x+</span>
+            <input type="number" name="sub_3_2" id="sub_3_2"style="width: 50px;height:20px"value="0"/>
+            <span>y</span>
+            <select id="sub_3_op">
+              <option value="max">>=</option>
+              <option value="min"><=</option>
+              <option value="equal">=</option>
+            </select>
+            <input type="number" name="sub_3_3" id="sub_3_3"style="width: 50px;height:20px"value="0"/>
+            <br>
 
-            <input type="text" name="subject_to_3" id="subject_to_3" placeholder="constraint 3" />
+            <input type="number" name="sub_4_1" id="sub_4_1"style="width: 50px;height:20px"value="0"/>
+            <span>x+</span>
+            <input type="number" name="sub_4_2" id="sub_4_2"style="width: 50px;height:20px"value="0"/>
+            <span>y</span>
+            <select id="sub_4_op">
+              <option value="max">>=</option>
+              <option value="min"><=</option>
+              <option value="equal">=</option>
+            </select>
+            <input type="number" name="sub_4_3" id="sub_4_3"style="width: 50px;height:20px"value="0"/>
+            <br>
 
-            <input type="text" name="subject_to_4" id="subject_to_4" placeholder="constraint 4" /><br>
-
-            <input type="text" name="subject_to_5" id="subject_to_5" placeholder="constraint 5" />
-
-            <input type="text" name="subject_to_6" id="subject_to_6" placeholder="constraint 6" /><br>
+            <input type="number" name="sub_5_1" id="sub_5_1"style="width: 50px;height:20px"value="0"/>
+            <span>x+</span>
+            <input type="number" name="sub_5_2" id="sub_5_2"style="width: 50px;height:20px"value="0"/>
+            <span>y</span>
+            <select id="sub_5_op">
+              <option value="max">>=</option>
+              <option value="min"><=</option>
+              <option value="equal">=</option>
+            </select>
+            <input type="number" name="sub_5_3" id="sub_5_3"style="width: 50px;height:20px"value="0"/>
+            <br>
+            
           </div>
           <div>
+            <span>and x >= 0, y>=0;</span><br>
             <input type="checkbox" name="integer_solution" id="integer_solution" placeholder="integer solution" />
             <span>Return integer result only</span>
           </div>
