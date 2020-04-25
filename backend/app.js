@@ -186,9 +186,13 @@ app.post("/glpk", async function(req, res){
           const data = fs.readFileSync('temp.txt', 'utf8');
           output_lp = data;
         } catch (err) {
-          console.error(err);
+          res.send({
+            status: false,
+            output_lp: "MathProg model processing error",
+            message: "No file is uploaded"
+          });
         }
-      }else{error = "ERROR: uploaded file isn't in JSON type";}
+      }
 
       output = {
         status: true,
