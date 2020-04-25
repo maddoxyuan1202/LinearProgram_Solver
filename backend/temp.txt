@@ -1,4 +1,4 @@
-Problem:    problem
+Problem:    test
 Rows:       3
 Columns:    2
 Non-zeros:  6

@@ -9,6 +9,15 @@ const bodyparser = require("body-parser")
 const cors = require("cors");
 const morgan = require("morgan");
 
+require('shelljs/global');
+const fs = require('fs')
+var FileSaver = require('file-saver'); 
+
+
+
+
+// Sync call to exec()
+var version = exec('node --version', {silent:true}).output;
 
 //enable file uploaded
 app.use(
@@ -139,24 +148,46 @@ app.post("/glpk", async function(req, res){
   let error = "NO_ERROR";
   let output_lp;
   let output;
-  console.log("req", req);
-  //console.log("req.samplefile:", req.files.sampleFile);
-  //console.log(JSON.parse(req.files.sampleFile.data));
+
+  let model_post = req.body;
+  console.log("model_post", typeof model_post);
+
+  console.log("model_post is ", model_post);
+
+  let input =  Object.values(model_post)+"";
+  let replac_str = "%2B";
+  input = input.split(replac_str).join("+");
+  console.log("input:", input);
+
+
+  fs.writeFile("test.txt", input, (err, data) => {
+    if (err) throw err;
+  })
+
+  await delay(100);
+
+  // Async call to exec()
+  exec('glpsol -m test.txt -o temp.txt');
+
+
+
   try{
-    if(!req.files){
+    if(!req.body){
       res.send({
         status: false,
         message: "No file is uploaded"
       });
     }else{
-      if(req.files !== undefined){
-        
-        let model_post = req.files.sampleFile;
-        model_post.mv("./uploads/" + model_post.name);
-        let input = JSON.parse(model_post.data);
-        //const input_json = require(`../backend/uploads/${model_post.name}`);
-        output_lp = LinearProgramming(input, solver);
-        console.log(output_lp);
+      if(req.body !== undefined){
+
+  //       let model_post = req.files.solution;
+  //       model_post.mv("./uploads/" + model_post.name);
+        try {
+          const data = fs.readFileSync('temp.txt', 'utf8');
+          output_lp = data;
+        } catch (err) {
+          console.error(err);
+        }
       }else{error = "ERROR: uploaded file isn't in JSON type";}
 
       output = {
@@ -165,12 +196,12 @@ app.post("/glpk", async function(req, res){
         output_lp: output_lp,
         error: error
       };
-      
+
       let outputString = JSON.stringify(output, null, 2);
       console.log("outputString: ", outputString);
 
       await delay(1000);
-      
+
       res.send(output);
     }
   }catch(err){
@@ -178,6 +209,7 @@ app.post("/glpk", async function(req, res){
     console.log("error in app post:", err);
   }
 })
+
 
 
 app.listen(port, err => {
