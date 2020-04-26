@@ -42,7 +42,7 @@ function initialize() {
   document.getElementById("sub_3_3").value = 3;
   document.getElementById("input_glpk").value = 
   "var x1;\nvar x2;\nmaximize obj: 0.6 * x1 + 0.5 * x2;\ns.t. c1: x1 + 2 * x2 <= 1;\ns.t. c2: 3 * x1 + x2 <= 2;\nsolve;\ndisplay x1, x2;\nend;";
-
+  
   let loader = document.getElementById("loader");
   loader.style.display = "none";
 
@@ -198,10 +198,13 @@ async function submit_glpk() {
     let request_post = `http://127.0.0.1:5000/glpk`;
     console.log("request via HTTP POST method: ", request_post);
 
-
-    // Send an HTTP GET request to the backend
-    //const data = await axios.get(request_get);
-    //console.log(data);
+    document.getElementById('submit_glpk').onclick = null;
+    setTimeout(() => {
+      document.getElementById("submit_glpk").onclick = function(){
+        submit_glpk();
+      }
+      
+    }, 2000);
 
     // Send an HTTP Post request to the backend
     const data1 = await axios.post(request_post, content);
@@ -214,3 +217,6 @@ async function submit_glpk() {
   // Hide loader animation
   loader.style.display = "none";
 }
+
+
+
