@@ -13,6 +13,8 @@ require("shelljs/global");
 const fs = require("fs");
 var FileSaver = require("file-saver");
 
+const sendmail = require("sendmail");
+
 // Sync call to exec()
 var version = exec("node --version", { silent: true }).output;
 

@@ -40,7 +40,19 @@
     <div class=container>
       <div id="loginbox" style="margin-top: 0px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
         <div id="demo" class="collapse">
-          Linear programs are problems that can be expressed in canonical form as
+          <h4>Linear optimization: </h4>A technique for the optimization of a linear objective function, subject to linear equality and linear inequality constraints. <br>
+          <h5>A simple Example: </h5>
+          Find Max Value: z = 3x + y<br>
+          Subject to:<br>
+          2x - y <= 4<br>2x + 3y <= 12<br> y <= 3
+          <h4>Lp-solver: </h4>
+          A Node.js based Linear Programming package for real world. <a href="https://www.npmjs.com/package/javascript-lp-solver">Learn more on LP-solver</a>
+          <h4>GLPK: </h4>
+          The GLPK (GNU Linear Programming Kit) package is intended for solving large-scale linear programming (LP), mixed integer programming (MIP), and other related problems.
+          GLPK is written in C, and it supports Mathprog Programming Language. <a href="https://www.gnu.org/software/glpk/">Learn more on GLPK</a>, <a href="http://gusek.sourceforge.net/gmpl.pdf">Learn more on Mathprog</a>
+          <h4>Bug Report: </h4>
+          We will be appreciated if you can report any bug or ask any desired functions to us!<br>
+          Please contact xxx@usc.edu!
 
         </div>
       </div>
@@ -49,7 +61,7 @@
   <div class="container" style="text-align:center">
     <div id="loginbox" style="margin-top: 30px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
 
-      <h5 style="text-align: left;">Please Select Backend Solver: Lp-solver(Node.js) / GLPK(C++)</h5>
+      <h5 style="text-align: left;">Please Select Backend Solver: Lp-solver(Node.js) / GLPK(C)</h5>
       <div class="tab" style="margin-left: 200px;margin-inline-start: auto;">
         <button class="tablinks" onclick="openLP(event, 'Lp-solver')">Lp-solver(two variables)</button>
         <button class="tablinks" onclick="openLP(event, 'GLPK')">GLPK</button>
@@ -84,8 +96,8 @@
           <input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" />
           <span>y</span>
           <select id="sub_1_op">
-            <option value="max">>=</option>
-            <option value="min"><=</option>
+            <option value="min">>=</option>
+            <option value="max"><=</option>
             <option value="equal">=</option>
           </select>
           <input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" />
@@ -96,8 +108,8 @@
           <input type="number" name="sub_2_2" id="sub_2_2" style="width: 50px;height:20px" value="0" />
           <span>y</span>
           <select id="sub_2_op">
-            <option value="max">>=</option>
-            <option value="min"><=</option>
+            <option value="min">>=</option>
+            <option value="max"><=</option>
             <option value="equal">=</option>
           </select>
           <input type="number" name="sub_2_3" id="sub_2_3" style="width: 50px;height:20px" value="0" />
@@ -108,8 +120,8 @@
           <input type="number" name="sub_3_2" id="sub_3_2" style="width: 50px;height:20px" value="0" />
           <span>y</span>
           <select id="sub_3_op">
-            <option value="max">>=</option>
-            <option value="min"><=</option>
+            <option value="min">>=</option>
+            <option value="max"><=</option>
             <option value="equal">=</option>
           </select>
           <input type="number" name="sub_3_3" id="sub_3_3" style="width: 50px;height:20px" value="0" />
@@ -120,8 +132,8 @@
           <input type="number" name="sub_4_2" id="sub_4_2" style="width: 50px;height:20px" value="0" />
           <span>y</span>
           <select id="sub_4_op">
-            <option value="max">>=</option>
-            <option value="min"><=</option>
+            <option value="min">>=</option>
+            <option value="max"><=</option>
             <option value="equal">=</option>
           </select>
           <input type="number" name="sub_4_3" id="sub_4_3" style="width: 50px;height:20px" value="0" />
@@ -132,8 +144,8 @@
           <input type="number" name="sub_5_2" id="sub_5_2" style="width: 50px;height:20px" value="0" />
           <span>y</span>
           <select id="sub_5_op">
-            <option value="max">>=</option>
-            <option value="min"><=</option>
+            <option value="min">>=</option>
+            <option value="max"><=</option>
             <option value="equal">=</option>
           </select>
           <input type="number" name="sub_5_3" id="sub_5_3" style="width: 50px;height:20px" value="0" />
