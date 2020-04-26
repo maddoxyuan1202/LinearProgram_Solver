@@ -77,7 +77,7 @@ async function submit_lpsolver() {
   document.body.style.cursor = "wait";
 
   // Accessing the div that has random value 
-  let solution_lp = document.getElementById("result_by_lp_solver");
+  let solution_lp = document.getElementById("solution_lp");
 
   solution_lp.innerHTML = "Please wait...";
   
