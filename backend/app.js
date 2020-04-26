@@ -19,6 +19,8 @@ var FileSaver = require('file-saver');
 // Sync call to exec()
 var version = exec('node --version', {silent:true}).output;
 
+
+
 //enable file uploaded
 app.use(
   fileUpload({
@@ -186,11 +188,7 @@ app.post("/glpk", async function(req, res){
           const data = fs.readFileSync('temp.txt', 'utf8');
           output_lp = data;
         } catch (err) {
-          res.send({
-            status: false,
-            output_lp: "MathProg model processing error",
-            message: "No file is uploaded"
-          });
+          output_lp = "MathProg model processing error";
         }
       }
 
@@ -214,6 +212,19 @@ app.post("/glpk", async function(req, res){
   }
 })
 
+
+function output_lp_glpk(){
+  try {
+    const data = fs.readFileSync('temp.txt', 'utf8');
+    output_lp = data;
+  } catch (err) {
+    output_lp = "MathProg model processing error";
+  }
+  return output_lp;
+}
+module.exports = {
+  output_lp_glpk: output_lp_glpk,
+};
 
 
 app.listen(port, err => {

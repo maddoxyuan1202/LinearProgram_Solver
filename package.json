@@ -4,7 +4,7 @@
   "description": "A full stack project on linear programming for NodeJS.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -13,22 +13,26 @@
   "keywords": [
     "nodejs",
     "fullstack",
+    "glpk",
     "frontend",
     "backend"
   ],
-  "author": "Tieming",
+  "author": "Tieming, Wenhao",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ourarash/nodejs_fullstack/issues"
   },
   "homepage": "https://github.com/ourarash/nodejs_fullstack#readme",
   "dependencies": {
+    "assert": "^2.0.0",
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.3",
     "file-saver": "^2.0.2",
     "javascript-lp-solver": "^0.4.24",
+    "mocha": "^7.1.1",
     "morgan": "^1.10.0",
     "shelljs": "^0.8.3"
   }
