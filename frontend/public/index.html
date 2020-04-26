@@ -1,178 +1,202 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <!-- Loading bootstrap css file to format our html -->
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
-  <!-- Loading our own styles which is an animation for spinning wheels indicating waiting time -->
-  <link href="style.css" rel="stylesheet" id="bootstrap-css" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <!-- Loading bootstrap css file to format our html -->
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Loading bootstrap css file to format our html -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+    <!-- Loading our own styles which is an animation for spinning wheels indicating waiting time -->
+    <link href="style.css" rel="stylesheet" id="bootstrap-css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Loading bootstrap css file to format our html -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-  <!-- Loading axios library necessary for making HTTP GET requests -->
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <title>Linear Programming Solver</title>
-</head>
+    <!-- Loading axios library necessary for making HTTP GET requests -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+      $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+      });
+    </script>
+    <title>Linear Programming Solver</title>
+  </head>
 
 <body>
-  <div class="topnav">
-    <a class="active" href="/">Home</a>
-    <a href="about">About Us</a>
-    <a href="login">Log In / Sign Up</a>
-  </div>
+  <h2 style="text-align: center;">Linear Programming Solver</h2>
   <div class="container">
-    <div id="loginbox" style="margin-top: 50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div id="loginbox" style="margin-top: 30px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
       <div class="panel panel-info">
         <div class="panel-heading">
-          <div class="panel-title">
-            Linear Programming Solver
-          </div>
-        </div>
-        <span>Select Backend Solver: GLPK(C++) / Lp-solver(Node.js) </span>
-        <div class="tab">
-          <button class="tablinks" onclick="openLP(event, 'Lp-solver')">Lp-solver(two variables)</button>
-          <button class="tablinks" onclick="openLP(event, 'GLPK')">GLPK</button>
-        </div>
-        <div id="Lp-solver" class="tabcontent">
-
-
-          <label for="optimize">Choose Optimize:</label>
-          <select id="optimize">
-            <option value="max">Max</option>
-            <option value="min">Min</option>
-          </select>
-
-          <!-- <div>
-            <label for="varibales">Variables (split by a sapce)</label>
-            <input type="text" name="varibales" id="varibales" placeholder="put variables" />
-          </div> -->
-
-          <div>
-            <label for="objective_func">Objective Function:</label>
-            <span>z=</span>
-            <input type="number" name="obj_1" id="obj_1" style="width: 50px;height:20px" value="0" />
-            <span>x+</span>
-            <input type="number" name="obj_2" id="obj_2" style="width: 50px;height:20px" value="0" />
-            <span>y</span>
-
-          </div>
-          <div>
-            <label for="subject_to">Subject To: (if you don't use some constraints, keep it plain) </label><br>
-            <input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" />
-            <span>x+</span>
-            <input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" />
-            <span>y</span>
-            <select id="sub_1_op">
-              <option value="max">>=</option>
-              <option value="min">
-                <=< /option>
-              <option value="equal">=</option>
-            </select>
-            <input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" />
-            <br>
-
-            <input type="number" name="sub_2_1" id="sub_2_1" style="width: 50px;height:20px" value="0" />
-            <span>x+</span>
-            <input type="number" name="sub_2_2" id="sub_2_2" style="width: 50px;height:20px" value="0" />
-            <span>y</span>
-            <select id="sub_2_op">
-              <option value="max">>=</option>
-              <option value="min">
-                <=< /option>
-              <option value="equal">=</option>
-            </select>
-            <input type="number" name="sub_2_3" id="sub_2_3" style="width: 50px;height:20px" value="0" />
-            <br>
-
-            <input type="number" name="sub_3_1" id="sub_3_1" style="width: 50px;height:20px" value="0" />
-            <span>x+</span>
-            <input type="number" name="sub_3_2" id="sub_3_2" style="width: 50px;height:20px" value="0" />
-            <span>y</span>
-            <select id="sub_3_op">
-              <option value="max">>=</option>
-              <option value="min">
-                <=< /option>
-              <option value="equal">=</option>
-            </select>
-            <input type="number" name="sub_3_3" id="sub_3_3" style="width: 50px;height:20px" value="0" />
-            <br>
-
-            <input type="number" name="sub_4_1" id="sub_4_1" style="width: 50px;height:20px" value="0" />
-            <span>x+</span>
-            <input type="number" name="sub_4_2" id="sub_4_2" style="width: 50px;height:20px" value="0" />
-            <span>y</span>
-            <select id="sub_4_op">
-              <option value="max">>=</option>
-              <option value="min">
-                <=< /option>
-              <option value="equal">=</option>
-            </select>
-            <input type="number" name="sub_4_3" id="sub_4_3" style="width: 50px;height:20px" value="0" />
-            <br>
-
-            <input type="number" name="sub_5_1" id="sub_5_1" style="width: 50px;height:20px" value="0" />
-            <span>x+</span>
-            <input type="number" name="sub_5_2" id="sub_5_2" style="width: 50px;height:20px" value="0" />
-            <span>y</span>
-            <select id="sub_5_op">
-              <option value="max">>=</option>
-              <option value="min">
-                <=< /option>
-              <option value="equal">=</option>
-            </select>
-            <input type="number" name="sub_5_3" id="sub_5_3" style="width: 50px;height:20px" value="0" />
-            <br>
-
-          </div>
-          <div>
-            <span>and x >= 0, y>=0;</span><br>
-            <input type="checkbox" name="integer_solution" id="integer_solution" placeholder="integer solution"
-              value="integer" />
-            <span>Return integer result only</span>
-          </div>
-
-          <div class="text-center padding-y-sm btn-lg btn-block">
-            <input type="submit" name="submit_lp" id="submit_lp" value="Generate By Lp Solver!"
-              class="btn btn-primary mt-8" onclick="submit_lp()" />
-          </div>
-        </div>
-        <div id="GLPK" class="tabcontent">
-
-          <div>
-            <label for="input_glpk">Mathprog:</label><br>
-            <textarea id="input_glpk" rows="10" cols="60">
-              </textarea>
-
-          </div>
-          <div class="text-center padding-y-sm btn-lg btn-block">
-            <input type="submit" name="submit_glpk" id="submit_glpk" value="Generate By GLPK!"
-              class="btn btn-primary mt-8" onclick="submit_glpk()" />
-          </div>
-          <div>
-            <label for="solution_glpk">Solution:</label><br>
-            <textarea id="solution_glpk" rows="10" cols="60">
-              </textarea>
-
-          </div>
-
-        </div>
-
-
-
-        <div class="text-center padding-y-sm btn-lg btn-block">
-          <span class="loader text-center" id="loader"></span>
-
-          <!-- ** show random value here. We modify the text in this span through javascript! ** -->
-          <span id="result_by_lp_solver"></span>
+          <p>Welcome to use Linear Programming Solver!</p>
+          <p>Click Button below for more information on Backend sources or Developers</p>
+          <a type="button" class="btn btn-info collapsed" data-toggle="collapse" data-target="#demo">More You Should Know</a>    
         </div>
 
       </div>
     </div>
+
   </div>
+    <div class=container>
+      <div id="loginbox" style="margin-top: 0px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
+        <div id="demo" class="collapse">
+          Linear programs are problems that can be expressed in canonical form as
+
+        </div>
+      </div>
+
+    </div>
+  <div class="container" style="text-align:center">
+    <div id="loginbox" style="margin-top: 30px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
+
+      <h5 style="text-align: left;">Please Select Backend Solver: GLPK(C++) / Lp-solver(Node.js) </h5>
+      <div class="tab" style="margin-left: 200px;margin-inline-start: auto;">
+        <button class="tablinks" onclick="openLP(event, 'Lp-solver')">Lp-solver(two variables)</button>
+        <button class="tablinks" onclick="openLP(event, 'GLPK')">GLPK</button>
+      </div>
+      <div id="Lp-solver" class="tabcontent">
+
+
+        <label for="optimize">Choose Optimize:</label>
+        <select id="optimize">
+          <option value="max">Max</option>
+          <option value="min">Min</option>
+        </select>
+
+        <!-- <div>
+            <label for="varibales">Variables (split by a sapce)</label>
+            <input type="text" name="varibales" id="varibales" placeholder="put variables" />
+          </div> -->
+
+        <div>
+          <label for="objective_func">Objective Function:</label>
+          <span>z=</span>
+          <input type="number" name="obj_1" id="obj_1" style="width: 50px;height:20px" value="0" />
+          <span>x+</span>
+          <input type="number" name="obj_2" id="obj_2" style="width: 50px;height:20px" value="0" />
+          <span>y</span>
+
+        </div>
+        <div>
+          <label for="subject_to">Subject To: (if you don't use some constraints, keep it plain) </label><br>
+          <input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" />
+          <span>x+</span>
+          <input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" />
+          <span>y</span>
+          <select id="sub_1_op">
+            <option value="max">>=</option>
+            <option value="min">
+              <=< /option>
+            <option value="equal">=</option>
+          </select>
+          <input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" />
+          <br>
+
+          <input type="number" name="sub_2_1" id="sub_2_1" style="width: 50px;height:20px" value="0" />
+          <span>x+</span>
+          <input type="number" name="sub_2_2" id="sub_2_2" style="width: 50px;height:20px" value="0" />
+          <span>y</span>
+          <select id="sub_2_op">
+            <option value="max">>=</option>
+            <option value="min">
+              <=< /option>
+            <option value="equal">=</option>
+          </select>
+          <input type="number" name="sub_2_3" id="sub_2_3" style="width: 50px;height:20px" value="0" />
+          <br>
+
+          <input type="number" name="sub_3_1" id="sub_3_1" style="width: 50px;height:20px" value="0" />
+          <span>x+</span>
+          <input type="number" name="sub_3_2" id="sub_3_2" style="width: 50px;height:20px" value="0" />
+          <span>y</span>
+          <select id="sub_3_op">
+            <option value="max">>=</option>
+            <option value="min">
+              <=< /option>
+            <option value="equal">=</option>
+          </select>
+          <input type="number" name="sub_3_3" id="sub_3_3" style="width: 50px;height:20px" value="0" />
+          <br>
+
+          <input type="number" name="sub_4_1" id="sub_4_1" style="width: 50px;height:20px" value="0" />
+          <span>x+</span>
+          <input type="number" name="sub_4_2" id="sub_4_2" style="width: 50px;height:20px" value="0" />
+          <span>y</span>
+          <select id="sub_4_op">
+            <option value="max">>=</option>
+            <option value="min">
+              <=< /option>
+            <option value="equal">=</option>
+          </select>
+          <input type="number" name="sub_4_3" id="sub_4_3" style="width: 50px;height:20px" value="0" />
+          <br>
+
+          <input type="number" name="sub_5_1" id="sub_5_1" style="width: 50px;height:20px" value="0" />
+          <span>x+</span>
+          <input type="number" name="sub_5_2" id="sub_5_2" style="width: 50px;height:20px" value="0" />
+          <span>y</span>
+          <select id="sub_5_op">
+            <option value="max">>=</option>
+            <option value="min">
+              <=< /option>
+            <option value="equal">=</option>
+          </select>
+          <input type="number" name="sub_5_3" id="sub_5_3" style="width: 50px;height:20px" value="0" />
+          <br>
+
+        </div>
+        <div>
+          <span>and x >= 0, y>=0;</span><br>
+          <input type="checkbox" name="integer_solution" id="integer_solution" placeholder="integer solution"
+            value="integer" />
+          <span>Return integer result only</span>
+        </div>
+
+        <div class="text-center padding-y-sm btn-lg btn-block">
+          <input type="submit" name="submit_lp" id="submit_lp" value="Generate By Lp Solver!"
+            class="btn btn-primary mt-8" onclick="submit_lp()" />
+        </div>
+        <div class="text-center padding-y-sm btn-lg btn-block">
+          <span class="loader text-center" id="loader"></span>
+
+          <!-- ** show random value here. We modify the text in this span through javascript! ** -->
+          <span id="solution_lp"></span>
+        </div>
+      </div>
+      <div id="GLPK" class="tabcontent">
+
+        <div>
+          <label for="input_glpk">Mathprog:</label><br>
+          <textarea id="input_glpk" rows="15" cols="80">
+              </textarea>
+
+        </div>
+        <div class="text-center padding-y-sm btn-lg btn-block">
+          <input type="submit" name="submit_glpk" id="submit_glpk" value="Generate By GLPK!"
+            class="btn btn-primary mt-8" onclick="submit_glpk()" />
+        </div>
+        <div>
+          <label for="solution_glpk">Solution:</label><br>
+          <textarea id="solution_glpk" rows="15" cols="80">
+              </textarea>
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- Use script.js to handle events on this page -->
+  <script type="text/javascript" src="script.js"></script>
 </body>
-<!-- Use script.js to handle events on this page -->
-<script type="text/javascript" src="script.js"></script>
 
 </html>
