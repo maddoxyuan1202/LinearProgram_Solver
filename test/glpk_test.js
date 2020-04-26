@@ -3,7 +3,7 @@ const myLib = require("../backend/app.js");
 const fs = require('fs')
 
 try {
-    const data = fs.readFileSync('../backend/temp.txt', 'utf8');
+    const data = fs.readFileSync('../test/test.txt', 'utf8');
     output_lp = data;
   } catch (err) {
     output_lp = "MathProg model processing error";
