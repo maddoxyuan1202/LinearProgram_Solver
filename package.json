@@ -32,8 +32,9 @@
     "express-fileupload": "^1.1.7-alpha.3",
     "file-saver": "^2.0.2",
     "javascript-lp-solver": "^0.4.24",
-    "mocha": "^7.1.1",
+    "mocha": "^7.1.2",
     "morgan": "^1.10.0",
+    "sendmail": "^1.6.1",
     "shelljs": "^0.8.3"
   }
 }

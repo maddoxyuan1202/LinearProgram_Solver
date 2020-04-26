@@ -40,6 +40,7 @@ const port = 5000;
 function LinearProgramming(model, solver) {
   return solver.Solve(model);
 }
+
 /**
  * A promise that resolves after t ms.
  * @param {Number} t
@@ -171,10 +172,12 @@ function output_lp_glpk() {
   }
   return output_lp;
 }
-module.exports = {
-  output_lp_glpk: output_lp_glpk,
-};
 
 app.listen(port, (err) => {
   console.log(`Listening on port: ${port}`);
 });
+
+module.exports = {
+  output_lp_glpk: output_lp_glpk,
+  LinearProgramming: LinearProgramming,
+};
