@@ -262,15 +262,3 @@ async function handleGet(req, res, query) {
   // Send it back to the frontend.
   res.send(outputString);
 }
-
-
-require('shelljs/global');
-
-// Sync call to exec()
-var version = exec('node --version', {silent:true}).output;
-
-// Async call to exec()
-exec('glpsol --cuts --fpump --mipgap 0.001 --model glpk_example/problem.mod -o glpk_example/temp.txt', function(status, output) {
-  console.log('Exit status:', status);
-  console.log('Program output:', output);
-});

@@ -111,8 +111,7 @@ async function submit_lpsolver() {
   let sub_5_op = document.getElementById("sub_5_op").value;
 
   let max_or_min = document.getElementById("optimize").value;
-  let integer = document.getElementById("integer_solution").value;
-  
+  let integer = document.getElementById("integer_solution").checked;
   let input_json = {};
   input_json.opType = max_or_min;
   input_json.optimize = 'z';
@@ -120,7 +119,7 @@ async function submit_lpsolver() {
   input_json.variables={
     'x': {'z': obj_1, 'c1': sub_1_1, 'c2': sub_2_1, 'c3': sub_3_1, 'c4': sub_4_1, 'c5':sub_5_1},
     'y': {'z': obj_2, 'c1': sub_1_2, 'c2': sub_2_2, 'c3': sub_3_2, 'c4': sub_4_2, 'c5':sub_5_2}};
-  if(integer === "integer"){
+  if(integer === true){
     input_json.ints = {'x': 1, 'y': 1};
   }
   input_json = JSON.stringify(input_json);
