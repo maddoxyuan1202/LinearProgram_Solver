@@ -18,14 +18,7 @@
 
     <!-- Loading axios library necessary for making HTTP GET requests -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-      });
-      $(document).ready(function () {
-        $('[data-toggle="popover"]').popover();
-      });
-    </script>
+    
     <title>Linear Programming Solver</title>
   </head>
 
@@ -161,8 +154,7 @@
         <div class="text-center padding-y-sm btn-lg btn-block">
           <span class="loader text-center" id="loader"></span>
 
-          <!-- ** show random value here. We modify the text in this span through javascript! ** -->
-          <span id="solution_lp"></span>
+          <div id="solution_lp"></div>
         </div>
       </div>
       <div id="GLPK" class="tabcontent">
@@ -188,7 +180,7 @@
 
 
     </div>
-  </div>
+  </div><br>
 
   <!-- Use script.js to handle events on this page -->
   <script type="text/javascript" src="script.js"></script>

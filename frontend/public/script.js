@@ -57,9 +57,6 @@ document.getElementById("submit_lp").onclick = function() {
   submit_lpsolver();
 };
 
-document.getElementById("submit_lpsolver").onclick = function(){
-  submit_lpsolver();
-}
 document.getElementById("submit_glpk").onclick = function(){
   submit_glpk();
 }
@@ -150,7 +147,17 @@ async function submit_lpsolver() {
     // Send an HTTP Post request to the backend
     //const data1 = await axios.post(request_post, input_json);
     //console.log(data1);
-    solution_lp.innerHTML = "Here is your solution: " + JSON.stringify(data.data.output_lp);
+    console.log(data.data.output_lp)
+    if(data.data.output_lp.feasible === true){
+      solution_lp.innerHTML ="Congratulations! We can find a feasible solution. :)" + "<br /><br />";
+    }else{
+      solution_lp.innerHTML ="Sorry, We cannot find a feasible solution. :(" + "<br /><br />";
+    }
+
+    for( var p in data.data.output_lp){
+      solution_lp.innerHTML += (p + " is " + data.data.output_lp[p] + "<br />");
+    }
+
     
   } catch (error) {
     console.log("error: ", error);
