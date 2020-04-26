@@ -8,18 +8,6 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-app.get("/login", (req, res) => {
-  res.sendFile(__dirname + "/public/login.html");
-});
-
-app.post("/upload", function (req, res){
-  let content;
-  if(req.method === 'POST'){
-    content = JSON.stringify(req.body, null, 2);
-  }
-  res.send(`method=${req.method} <br> content=${content}`);
-} )
-
-app.listen(port, err => {
+app.listen(port, (err) => {
   console.log(`Listening on port: ${port}`);
 });
