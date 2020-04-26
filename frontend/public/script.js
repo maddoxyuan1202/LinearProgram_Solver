@@ -141,17 +141,6 @@ async function submit_lpsolver() {
     }
     input_json = JSON.stringify(input_json);
 
-    // // an example of input_json
-    // let input_json = {
-    //   optimize: 'maximize',
-    //   opType: 'max',
-    //   constraints: { c1: { max: 4 }, c2: { max: 12 }, c3: { max: 3 } },
-    //   variables: {
-    //     x: { maximize: 3, c1: 2, c2: 2, c3: 0 },
-    //     y: { maximize: 1, c1: -1, c2: 3, c3: 1 }
-    //   }
-    // };
-    // input_json = JSON.stringify(input_json);
 
     let request_get = `http://127.0.0.1:5000/?model=${input_json}`;
     console.log("request via HTTP GET method: ", request_get);
@@ -210,8 +199,6 @@ async function submit_glpk() {
 
     console.log("input_glpk:" + content);
 
-    //let request_get = `http://127.0.0.1:5000/?model=${input_json}`;
-    //console.log("request via HTTP GET method: ", request_get);
     let request_post = `http://127.0.0.1:5000/glpk`;
     console.log("request via HTTP POST method: ", request_post);
 
