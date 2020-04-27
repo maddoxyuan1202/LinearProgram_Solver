@@ -68,7 +68,7 @@ app.get("/", async function (req, res) {
     handleGet(res, res, req.query);
   }
 });
-//-----------------------------------------------------------------------------
+
 /**
  * Handles a Get request
  * @param {Object} req
@@ -111,7 +111,7 @@ async function handleGet(req, res, query) {
   // Send it back to the frontend.
   res.send(outputString);
 }
-
+//-----------------------------------------------------------------------------
 app.post("/glpk", async function (req, res) {
   let error = "NO_ERROR";
   let output_lp;
