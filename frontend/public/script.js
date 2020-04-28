@@ -1,3 +1,14 @@
+/* unblock the chosen division*/
+function showDiv(select)
+{
+  document.getElementById("hidden_div2").style.display = select.value == 2 ? 'block' : 'none';
+  document.getElementById("hidden_div3").style.display = select.value == 3 ? 'block' : 'none';
+  document.getElementById("hidden_div4").style.display = select.value == 4 ? 'block' : 'none';
+  document.getElementById("hidden_div5").style.display = select.value == 5 ? 'block' : 'none';
+  document.getElementById("hidden_div6").style.display = select.value == 6 ? 'block' : 'none';
+
+}
+console.log("1111111");
 /**
  * On click the tab, show one content and hide another one
  * 点击分隔页时，仅显示LP-solver或者GLPK中的一个
@@ -34,12 +45,14 @@ function initialize() {
   document.getElementById("sub_1_1").value = 2;
   document.getElementById("sub_1_2").value = -1;
   document.getElementById("sub_1_3").value = 4;
+  /*
   document.getElementById("sub_2_1").value = 2;
   document.getElementById("sub_2_2").value = 3;
   document.getElementById("sub_2_3").value = 12;
   document.getElementById("sub_3_1").value = 0;
   document.getElementById("sub_3_2").value = 1;
   document.getElementById("sub_3_3").value = 3;
+  */
   document.getElementById("input_glpk").value =
     "var x1;\nvar x2;\nmaximize obj: 0.6 * x1 + 0.5 * x2;\ns.t. c1: x1 + 2 * x2 <= 1;\ns.t. c2: 3 * x1 + x2 <= 2;\nsolve;\ndisplay x1, x2;\nend;";
 
@@ -66,6 +79,7 @@ document.getElementById("submit_glpk").onclick = function () {
  * As a package, it requires a JSON as the final input and return an output JSON
  * https://www.npmjs.com/package/javascript-lp-solver
  */
+/*
 async function submit_lpsolver() {
   console.log("In submit!");
 
@@ -80,7 +94,7 @@ async function submit_lpsolver() {
   // Show the loader element (spinning wheels)
   let loader = document.getElementById("loader");
   loader.style.display = "inline-block";
-
+  
   try {
     let obj_1 = document.getElementById("obj_1").value;
     let obj_2 = document.getElementById("obj_2").value;
@@ -176,7 +190,7 @@ async function submit_lpsolver() {
   // Hide loader animation
   loader.style.display = "none";
 }
-
+*/
 async function submit_glpk() {
   console.log("In submit!");
 
