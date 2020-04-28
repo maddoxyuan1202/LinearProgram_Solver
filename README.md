@@ -30,3 +30,24 @@ Jiaao Zhu: jiaaozhu@usc.edu
 A Node.js based Linear Programming package for real world. [Learn more on LP-solver](https://www.npmjs.com/package/javascript-lp-solver)
 ### GLPK
 An open Source Library written in C, which is a GNU based library dealing with Linear Programs, we wrapped it into our Node.js backend [Learn more on LP-solver](https://www.gnu.org/software/glpk/)
+
+## Simple steps to run this repo
+Clone this repo into your computer.
+```
+git clone https://github.com/suntietie/LinearProgram_Solver.git
+cd LinearProgram_Solver
+npm install
+```
+Install Homebrew if you don't: [Homebrew](https://brew.sh/)<br>
+Install GLPK
+```
+brew install glpk
+```
+Open frontend and backend
+```
+cd frontend/
+node app.js
+cd backend/
+node app.js
+```
+Last, open your browser to enjoy this website! http://localhost:3000
