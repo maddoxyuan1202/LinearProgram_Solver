@@ -3,7 +3,7 @@ An Everything Website for linear programming. Designed by 3 USC EE students.
 
 ## Linear Programming Introduction
 A technique for the optimization of a linear objective function, subject to linear equality and linear inequality constraints
-![LP-example](../LP_example.png)
+![LP-example](/LP_example.png)
 ## What we have done
 ![Webpage](../webpage.png)
 * Implement the backend by solving linear programs in two different sources: javescript-lp-solver and GLPK
