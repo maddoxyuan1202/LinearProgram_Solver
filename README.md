@@ -15,7 +15,14 @@ A technique for the optimization of a linear objective function, subject to line
 * Block Generate Button after a single click, to prevent multi-sending request to backend when it's working.
 * Send daily webpage usage email to webpage admin, in order to fully monitor the website
 ![Screenshot1](/screenshot1.png)
+Input for LP-solver
+
 ![Screenshot2](/screenshot2.png)
+Input for GLPK
+
+![Screenshot3](/daily_email.png)
+Daily digest for webpage users
+
 ## Tools we use 
 * Frontend: Bootstrap4, Html, Css, Jquery
 * Backend: Node.js
