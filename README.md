@@ -26,7 +26,7 @@ Daily digest for webpage users
 ## Tools we use 
 * Frontend: Bootstrap4, Html, Css, Jquery
 * Backend: Node.js
-* Libraries: express, javascript-lp-solver, GLPK, morgan, nodemailer, file-saver, shelljs, body-parser
+* Libraries: express, javascript-lp-solver, GLPK, morgan, nodemailer, fs, shelljs, body-parser
 
 ## Group members
 Wenhao Cui: wenhaocu@usc.edu <br>
