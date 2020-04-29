@@ -79,7 +79,7 @@ document.getElementById("submit_glpk").onclick = function () {
  * As a package, it requires a JSON as the final input and return an output JSON
  * https://www.npmjs.com/package/javascript-lp-solver
  */
-/*
+
 async function submit_lpsolver() {
   console.log("In submit!");
 
@@ -190,7 +190,7 @@ async function submit_lpsolver() {
   // Hide loader animation
   loader.style.display = "none";
 }
-*/
+
 async function submit_glpk() {
   console.log("In submit!");
 

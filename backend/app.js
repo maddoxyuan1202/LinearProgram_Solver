@@ -87,8 +87,8 @@ async function handleGet(req, res, query) {
     // Convert min_value and max_value from String to integer
     let model_get = JSON.parse(query.model);
 
-    // Generate a random number
-    output_lp = LinearProgramming(model_get, solver);
+    // Use NPM Package here
+    output_lp = await LinearProgramming(model_get, solver);
     console.log("Via http get method, output is: ", output_lp);
     users_lpsolver += 1;
   } else {
