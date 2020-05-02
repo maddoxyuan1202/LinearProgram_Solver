@@ -9,10 +9,9 @@ const bodyparser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
 const moment = require("moment");
-
+// We need shelljs middleware to execute command in terminal.
 require("shelljs/global");
 const fs = require("fs");
-const FileSaver = require("file-saver");
 
 const nodemailer = require("nodemailer");
 
@@ -120,7 +119,8 @@ app.post("/glpk", async function (req, res) {
   let error = "NO_ERROR";
   let output_lp;
   let output;
-
+  
+  // From req.body, we can get the math program model.
   let model_post = req.body;
   console.log("model_post", typeof model_post);
 
@@ -131,36 +131,32 @@ app.post("/glpk", async function (req, res) {
   let replac_str = "%2B";
   input = input.split(replac_str).join("+");
   console.log("input:", input);
-
+  // save the math program model in the test.txt file.
   fs.writeFile("test.txt", input, (err, data) => {
     if (err) throw err;
   });
 
+  //cause writeFile need to spend a very little time, I set a delay there.
   await delay(100);
 
-  // Async call to exec(), script to call GLPK using shell.js
+  // Async call to exec(), script to call GLPK command using shell.js
   exec("glpsol -m test.txt -o temp.txt");
 
   try {
-    if (!req.body) {
-      res.send({
-        status: false,
-        message: "No file is uploaded",
-      });
-    } else {
-      if (req.body !== undefined) {
-        try {
-          const data = fs.readFileSync("temp.txt", "utf8");
-          output_lp = data;
-        } catch (err) {
-          output_lp = "MathProg model processing error";
-          users_error += 1;
-        }
+
+    if (req.body !== undefined) {
+      //Read data from temp.txt file (or report error).
+      try {
+        output_lp = fs.readFileSync("temp.txt", "utf8");
+      } catch (err) {
+        //If there is no solution for wrong math program
+        output_lp = "MathProg model processing error";
+        users_error += 1;
       }
 
       output = {
         status: true,
-        message: "File is uploaded",
+        message: "Got the solution",
         output_lp: output_lp,
         error: error,
       };

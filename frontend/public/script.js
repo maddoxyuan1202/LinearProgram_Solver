@@ -184,6 +184,7 @@ document.getElementById("submit_glpk").onclick = function () {
 //   loader.style.display = "none";
 // }
 
+// This function is to send the math program in text area to the backend
 async function submit_glpk() {
   console.log("In submit!");
 
@@ -209,12 +210,17 @@ async function submit_glpk() {
     let request_post = `http://127.0.0.1:5000/glpk`;
     console.log("request via HTTP POST method: ", request_post);
 
+    //Before get the solution from the backend, we let this button does not 
+    //work in order to prevent the Send HTTP Post to many times.
     document.getElementById("submit_glpk").onclick = null;
+
+    //After 1 seconds (similar we set the delay time in backend) 
+    // we let the button work again.
     setTimeout(() => {
       document.getElementById("submit_glpk").onclick = function () {
         submit_glpk();
       };
-    }, 2000);
+    }, 1000);
 
     // Send an HTTP Post request to the backend
     const data1 = await axios.post(request_post, content);
