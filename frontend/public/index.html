@@ -198,81 +198,6 @@
                  </div>  
             </form>  
             </div>
-        <!-- <div>
-            <label for="varibales">Variables (split by a sapce)</label>
-            <input type="text" name="varibales" id="varibales" placeholder="put variables" />
-          </div> -->
-
-        <!-- <div>
-          <label for="objective_func">Objective Function:</label>
-          <span>z=</span>
-          <input type="number" name="obj_1" id="obj_1" style="width: 50px;height:20px" value="0" />
-          <span>x+</span>
-          <input type="number" name="obj_2" id="obj_2" style="width: 50px;height:20px" value="0" />
-          <span>y</span>
-
-        </div>
-        <div>
-          <label for="subject_to">Subject To: (if you don't use some constraints, keep it plain) </label><br>
-          <input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" />
-          <span>x+</span>
-          <input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" />
-          <span>y</span>
-          <select id="sub_1_op">
-            <option value="min">>=</option>
-            <option value="max"><=</option>
-            <option value="equal">=</option>
-          </select>
-          <input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" />
-          <br>
-
-          <input type="number" name="sub_2_1" id="sub_2_1" style="width: 50px;height:20px" value="0" />
-          <span>x+</span>
-          <input type="number" name="sub_2_2" id="sub_2_2" style="width: 50px;height:20px" value="0" />
-          <span>y</span>
-          <select id="sub_2_op">
-            <option value="min">>=</option>
-            <option value="max"><=</option>
-            <option value="equal">=</option>
-          </select>
-          <input type="number" name="sub_2_3" id="sub_2_3" style="width: 50px;height:20px" value="0" />
-          <br>
-
-          <input type="number" name="sub_3_1" id="sub_3_1" style="width: 50px;height:20px" value="0" />
-          <span>x+</span>
-          <input type="number" name="sub_3_2" id="sub_3_2" style="width: 50px;height:20px" value="0" />
-          <span>y</span>
-          <select id="sub_3_op">
-            <option value="min">>=</option>
-            <option value="max"><=</option>
-            <option value="equal">=</option>
-          </select>
-          <input type="number" name="sub_3_3" id="sub_3_3" style="width: 50px;height:20px" value="0" />
-          <br>
-
-          <input type="number" name="sub_4_1" id="sub_4_1" style="width: 50px;height:20px" value="0" />
-          <span>x+</span>
-          <input type="number" name="sub_4_2" id="sub_4_2" style="width: 50px;height:20px" value="0" />
-          <span>y</span>
-          <select id="sub_4_op">
-            <option value="min">>=</option>
-            <option value="max"><=</option>
-            <option value="equal">=</option>
-          </select>
-          <input type="number" name="sub_4_3" id="sub_4_3" style="width: 50px;height:20px" value="0" />
-          <br>
-
-          <input type="number" name="sub_5_1" id="sub_5_1" style="width: 50px;height:20px" value="0" />
-          <span>x+</span>
-          <input type="number" name="sub_5_2" id="sub_5_2" style="width: 50px;height:20px" value="0" />
-          <span>y</span>
-          <select id="sub_5_op">
-            <option value="min">>=</option>
-            <option value="max"><=</option>
-            <option value="equal">=</option>
-          </select>
-          <input type="number" name="sub_5_3" id="sub_5_3" style="width: 50px;height:20px" value="0" />
-          <br> -->
 
         </div>
         <div>
@@ -370,23 +295,9 @@
        $('#dynamic_field3').on('click', '.btn_remove', function(e){  
             var button_id = $(this).attr("id");   
             $('#row'+button_id+'').remove();      
-            i3--
+            i3--;
           }); 
             
-       });  
-       
-      //  $('#submit').click(function(){            
-      //       $.ajax({  
-      //            url:"name.php",  
-      //            method:"POST",  
-      //            data:$('#add_name').serialize(),  
-      //            success:function(data)  
-      //            {  
-      //                 alert(data);  
-      //                 $('#add_name')[0].reset();  
-      //            }  
-      //       });  
-      //  });  
-    
+       });      
   </script>
     

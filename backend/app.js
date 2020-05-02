@@ -80,11 +80,9 @@ async function handleGet(req, res, query) {
   let output_lp;
 
   console.log("query: ", query);
-  //console.log(query.model);
   // If there was a query (a query string was sent)
   if (query !== undefined && query.model !== undefined) {
     //console.log(model_get);
-    // Convert min_value and max_value from String to integer
     let model_get = JSON.parse(query.model);
 
     // Use NPM Package here
@@ -101,17 +99,23 @@ async function handleGet(req, res, query) {
     output_lp: output_lp,
     error: error,
   };
+
   // Convert output to string
   let outputString = JSON.stringify(output, null, 2);
   console.log("outputString: ", outputString);
   
-  // console.log(typeof outputString);
   // Let's generate some artificial delay!
   await delay(1000);
   // Send it back to the frontend.
   res.send(outputString);
 }
 //-----------------------------------------------------------------------------
+
+/**
+ * The /glpk path is using http post method,
+ * sending message to the frontend
+ * For another source -- GLPK
+ */
 app.post("/glpk", async function (req, res) {
   let error = "NO_ERROR";
   let output_lp;
@@ -123,6 +127,7 @@ app.post("/glpk", async function (req, res) {
   console.log("model_post is ", model_post);
 
   let input = Object.values(model_post) + "";
+  // decoding '+' into %2B and replace it as '+'
   let replac_str = "%2B";
   input = input.split(replac_str).join("+");
   console.log("input:", input);
@@ -133,7 +138,7 @@ app.post("/glpk", async function (req, res) {
 
   await delay(100);
 
-  // Async call to exec()
+  // Async call to exec(), script to call GLPK using shell.js
   exec("glpsol -m test.txt -o temp.txt");
 
   try {
@@ -144,8 +149,6 @@ app.post("/glpk", async function (req, res) {
       });
     } else {
       if (req.body !== undefined) {
-        //       let model_post = req.files.solution;
-        //       model_post.mv("./uploads/" + model_post.name);
         try {
           const data = fs.readFileSync("temp.txt", "utf8");
           output_lp = data;
@@ -166,6 +169,7 @@ app.post("/glpk", async function (req, res) {
       console.log("outputString: ", outputString);
 
       await delay(1000);
+      // get statistic for how many clicks
       users_glpk += 1;
       res.send(output);
     }
@@ -175,6 +179,10 @@ app.post("/glpk", async function (req, res) {
   }
 });
 
+/**
+ * This function is used for backend testing
+ * read temp.txt
+ */
 function output_lp_glpk() {
   try {
     const data = fs.readFileSync("temp.txt", "utf8");
@@ -186,7 +194,9 @@ function output_lp_glpk() {
 }
 
 
-
+/**
+ * by defalut, listen to localhost:5000
+ */
 app.listen(port, (err) => {
   console.log(`Listening on port: ${port}`);
 });
@@ -195,9 +205,8 @@ app.listen(port, (err) => {
 
 /*
  * Set an email every day so that admin could monitor 
- * Set gmail username and password
+ * write an Object using global variables
  */
-
 function analyze(){
   let data = {};
   data.all = users_lpsolver + users_glpk + users_error;
@@ -230,9 +239,9 @@ function SendMail(mailOptions) {
 }
 
 async function sendNotification() {
-  let data = await analyze();
+  let data = analyze();
   console.log(data);
-  
+  // write email in HTML documentation
   let date = moment().format("MMMM Do YYYY, h:mm:ss a");
   let body = `<pre>`;
   body += date + "\n";
@@ -251,14 +260,20 @@ async function sendNotification() {
   };
   SendMail(mailOptions);
 
+  // set these global variables back to zero
   users_error = 0;
   users_glpk = 0;
   users_lpsolver = 0;
 
 }
-
+/**
+ * Set interval for a day to receive email
+ */
 setInterval( sendNotification, 86400000);
 
+/**
+ * export 2 functions for test cases
+ */
 module.exports = {
   output_lp_glpk: output_lp_glpk,
   LinearProgramming: LinearProgramming,
