@@ -35,10 +35,7 @@
     "mocha": "^7.1.2",
     "moment": "^2.24.0",
     "morgan": "^1.10.0",
-<<<<<<< HEAD
-=======
     "nodemailer": "^6.4.6",
->>>>>>> 14ee3e42d7bc8474ff6764ca86ab53ccdf0e9e67
     "sendmail": "^1.6.1",
     "shelljs": "^0.8.3"
   }
