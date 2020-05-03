@@ -46,7 +46,7 @@ Wenhao Cui: wenhaocu@usc.edu <br>
 Tieming Sun: tiemings@usc.edu <br>
 Jiaao Zhu: jiaaozhu@usc.edu
 ## Link to video
-[click here](https://drive.google.com/a/usc.edu/file/d/1gRFnH6HnPkc7acvQ4Ojpu4zc5DoGjm1c/view?usp=drivesdk)
+[click here](https://youtu.be/nOh51QsuuGI)
 ## More about our backend sources
 ### Javasrcipt-lp-solver
 A Node.js based Linear Programming package for real world. [Learn more on LP-solver](https://www.npmjs.com/package/javascript-lp-solver)
