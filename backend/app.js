@@ -81,9 +81,7 @@ async function handleGet(req, res, query) {
   console.log("query: ", query);
   // If there was a query (a query string was sent)
   if (query !== undefined && query.model !== undefined) {
-    //console.log(model_get);
     let model_get = JSON.parse(query.model);
-
     // Use NPM Package here
     output_lp = await LinearProgramming(model_get, solver);
     console.log("Via http get method, output is: ", output_lp);
