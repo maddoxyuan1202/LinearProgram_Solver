@@ -32,176 +32,192 @@
         <div class="panel-heading">
           <p>Welcome to use Linear Programming Solver!</p>
           <p>Click Button below for more information on Backend sources or Developers</p>
-          <a type="button" class="btn btn-info collapsed" data-toggle="collapse" data-target="#demo">More You Should Know</a>    
+          <a type="button" class="btn btn-info collapsed" data-toggle="collapse" data-target="#demo">More You Should
+            Know</a>
         </div>
 
       </div>
     </div>
 
   </div>
-    <div class=container>
-      <div id="loginbox" style="margin-top: 0px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
-        <div id="demo" class="collapse">
-          <h4>Linear optimization: </h4>A technique for the optimization of a linear objective function, subject to linear equality and linear inequality constraints. <br>
-          <h5>A simple Example: </h5>
-          Find Max Value: z = 3x + y<br>
-          Subject to:<br>
-          2x - y <= 4<br>2x + 3y <= 12<br> y <= 3
-          <h4>Lp-solver: </h4>
-          A Node.js based Linear Programming package for real world. <a href="https://www.npmjs.com/package/javascript-lp-solver">Learn more on LP-solver</a>
-          <h4>GLPK: </h4>
-          The GLPK (GNU Linear Programming Kit) package is intended for solving large-scale linear programming (LP), mixed integer programming (MIP), and other related problems.
-          GLPK is written in C, and it supports Mathprog Programming Language. <a href="https://www.gnu.org/software/glpk/">Learn more on GLPK</a>, <a href="http://gusek.sourceforge.net/gmpl.pdf">Learn more on Mathprog</a>
-          <h4>Bug Report: </h4>
-          We will be appreciated if you can report any bug or ask any desired functions to us!<br>
-          Please contact xxx@usc.edu!
+  <!-- instruction of using this website, using bootstrap collapse -->
+  <div class=container>
+    <div id="loginbox" style="margin-top: 0px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
+      <div id="demo" class="collapse">
+        <h4>Linear optimization: </h4>A technique for the optimization of a linear objective function, subject to linear
+        equality and linear inequality constraints. <br>
+        <h5>A simple Example: </h5>
+        Find Max Value: z = 3x + y<br>
+        Subject to:<br>
+        2x - y <= 4<br>2x + 3y <= 12<br> y <= 3 <h4>Lp-solver: </h4>
+              A Node.js based Linear Programming package for real world. <a
+                href="https://www.npmjs.com/package/javascript-lp-solver">Learn more on LP-solver</a>
+              <h4>GLPK: </h4>
+              The GLPK (GNU Linear Programming Kit) package is intended for solving large-scale linear programming (LP),
+              mixed integer programming (MIP), and other related problems.
+              GLPK is written in C, and it supports Mathprog Programming Language. <a
+                href="https://www.gnu.org/software/glpk/">Learn more on GLPK</a>, <a
+                href="http://gusek.sourceforge.net/gmpl.pdf">Learn more on Mathprog</a>
+              <h4>Bug Report: </h4>
+              We will be appreciated if you can report any bug or ask any desired functions to us!<br>
+              Please contact <a href="https://github.com/suntietie/LinearProgram_Solver#group-members">here</a>
 
-        </div>
       </div>
-
     </div>
+
+  </div>
   <div class="container" style="text-align:center">
     <div id="loginbox" style="margin-top: 30px;" class="mainbox col-md-10 col-md-offset-1 col-sm-8 col-sm-offset-2">
-      
+
       <h5 style="text-align: left;">Please Select Backend Solver: Lp-solver(Node.js) / GLPK(C)</h5>
       <div class="tab" style="margin-left: 200px;margin-inline-start: auto;">
         <button class="tablinks" onclick="openLP(event, 'Lp-solver')">Lp-solver(two variables)</button>
         <button class="tablinks" onclick="openLP(event, 'GLPK')">GLPK</button>
       </div>
       <div id="Lp-solver" class="tabcontent">
-
+        <!-- variable number selection tab -->
         <div>
           <span>Number of variables</span>
           <select id="VaribleNum" name="form_select" onchange="showDiv(this)">
             <option value="2" selected>2</option>
             <option value="3">3</option>
             <option value="4">4</option>
-            <!-- <option value="5">5</option>
-            <option value="6">6</option> -->
           </select>
         </div>
+        <!-- optimize method selection tab -->
         <label for="optimize">Choose Optimize:</label>
         <select id="optimize">
           <option value="max">Max</option>
           <option value="min">Min</option>
         </select>
+
+        <!-- 2 variable constraint div file -->
         <div id="hidden_div2">
           <label for="objective_func">Objective Function:</label>
           <span>z=</span>
-          <input type="number" name="obj_1" id="obj_1" style="width: 50px;height:20px" value="0" />
+          <input type="number" name="obj_1_1" id="obj_1_1" style="width: 50px;height:20px" value="0" />
           <span>X1+</span>
-          <input type="number" name="obj_2" id="obj_2" style="width: 50px;height:20px" value="0" />
+          <input type="number" name="obj_2_1" id="obj_2_1" style="width: 50px;height:20px" value="0" />
           <span>X2</span>
           <br>
           <label for="subject_to">Subject To: (if you don't use some constraints, keep it plain) </label><br>
-          <div class="form-group">  
-            <form name="add_name" id="add_name">  
-                 <div class="table-responsive">
-                  <table class="table table-bordered" id="dynamic_field1">
-                    <tr>
-                      <td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td>
-                      <td><span>X1+</span></td>
-                      <td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td>
-                      <td><span>X2</span></td>
-                      <td><select id="sub_1_op">
+          <div class="form-group">
+            <form name="add_name" id="add_name">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dynamic_field1">
+                  <tr>
+                    <td><input class="sub_1_1" type="number" name="sub_1_1[]" id="sub_1_1"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><span>X1+</span></td>
+                    <td><input class="sub_1_2" type="number" name="sub_1_2[]" id="sub_1_2"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><span>X2</span></td>
+                    <td><select class="sub_1_op" name="sub_1_op[]" id="sub_1_op">
                         <option value="min">>=</option>
                         <option value="max"><=</option>
                         <option value="equal">=</option>
                       </select></td>
-                      <td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td>
-                      <td><button type="button" name="add" id="add1" class="btn btn-success">Add More</button></td>
-                      
-                    </tr>
-                  </table>  
-                 <!-- <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />   -->
-                 </div>  
-            </form>  
-            </div>
-         </div>
+                    <td><input class="sub_1_3" type="number" name="sub_1_3[]" id="sub_1_3"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><button type="button" name="add" id="add1" class="btn btn-success">Add More</button></td>
 
+                  </tr>
+                </table>
+              </div>
+            </form>
+          </div>
+        </div>
 
-         <div id="hidden_div3">
+        <!-- 3 variable constraint div file  -->
+        <div id="hidden_div3">
           <label for="objective_func">Objective Function:</label>
           <span>z=</span>
-          <input type="number" name="obj_1" id="obj_1" style="width: 50px;height:20px" value="0" />
+          <input type="number" name="obj_1_2" id="obj_1_2" style="width: 50px;height:20px" value="0" />
           <span>X1+</span>
-          <input type="number" name="obj_2" id="obj_2" style="width: 50px;height:20px" value="0" />
+          <input type="number" name="obj_2_2" id="obj_2_2" style="width: 50px;height:20px" value="0" />
           <span>X2+</span>
-          <input type="number" name="obj_3" id="obj_3" style="width: 50px;height:20px" value="0" />
+          <input type="number" name="obj_3_2" id="obj_3_2" style="width: 50px;height:20px" value="0" />
           <span>X3</span>
           <br>
           <label for="subject_to">Subject To: (if you don't use some constraints, keep it plain) </label><br>
-          <div class="form-group">  
-            <form name="add_name" id="add_name">  
-                 <div class="table-responsive">
-                  <table class="table table-bordered" id="dynamic_field2">
-                    <tr>
-                      <td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td>
-                      <td><span>X1+</span></td>
-                      <td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td>
-                      <td><span>X2+</span></td>
-                      <td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td>
-                      <td><span>X3</span></td>
-                      <td><select id="sub_1_op">
+          <div class="form-group">
+            <form name="add_name" id="add_name">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dynamic_field2">
+                  <tr>
+                    <td><input class="sub_2_1" type="number" name="sub_2_1[]" id="sub_2_1"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><span>X1+</span></td>
+                    <td><input class="sub_2_2" type="number" name="sub_2_2[]" id="sub_2_2"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><span>X2+</span></td>
+                    <td><input class="sub_2_3" type="number" name="sub_2_3[]" id="sub_2_3"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><span>X3</span></td>
+                    <td><select class="sub_2_op" name="sub_2_op[]" id="sub_2_op">
                         <option value="min">>=</option>
                         <option value="max"><=</option>
                         <option value="equal">=</option>
                       </select></td>
-                      <td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td>
-                      <td><button type="button" name="add" id="add2" class="btn btn-success">Add More</button></td>
-                      
-                    </tr>
-                  </table>  
-                 <!-- <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />   -->
-                 </div>  
-            </form>  
-            </div>
-         </div>
+                    <td><input class="sub_2_4" type="number" name="sub_2_4[]" id="sub_2_4"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><button type="button" name="add" id="add2" class="btn btn-success">Add More</button></td>
 
-         <div id="hidden_div4">
+                  </tr>
+                </table>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- 4 variable constraint div file  -->
+        <div id="hidden_div4">
           <label for="objective_func">Objective Function:</label>
           <span>z=</span>
-          <input type="number" name="obj_1" id="obj_1" style="width: 50px;height:20px" value="0" />
+          <input type="number" name="obj_1_3" id="obj_1_3" style="width: 50px;height:20px" value="0" />
           <span>X1+</span>
-          <input type="number" name="obj_2" id="obj_2" style="width: 50px;height:20px" value="0" />
+          <input type="number" name="obj_2_3" id="obj_2_3" style="width: 50px;height:20px" value="0" />
           <span>X2+</span>
-          <input type="number" name="obj_3" id="obj_3" style="width: 50px;height:20px" value="0" />
+          <input type="number" name="obj_3_3" id="obj_3_3" style="width: 50px;height:20px" value="0" />
           <span>X3+</span>
-          <input type="number" name="obj_4" id="obj_4" style="width: 50px;height:20px" value="0" />
+          <input type="number" name="obj_4_3" id="obj_4_3" style="width: 50px;height:20px" value="0" />
           <span>X4</span>
           <br>
           <label for="subject_to">Subject To: (if you don't use some constraints, keep it plain) </label><br>
-          <div class="form-group">  
-            <form name="add_name" id="add_name">  
-                 <div class="table-responsive">
-                  <table class="table table-bordered" id="dynamic_field3">
-                    <tr>
-                      <td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td>
-                      <td><span>X1+</span></td>
-                      <td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td>
-                      <td><span>X2+</span></td>
-                      <td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td>
-                      <td><span>X3+</span></td>
-                      <td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td>
-                      <td><span>X4</span></td>
-                      <td><select id="sub_1_op">
+          <div class="form-group">
+            <form name="add_name" id="add_name">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dynamic_field3">
+                  <tr>
+                    <td><input class="sub_3_1" type="number" name="sub_3_1[]" id="sub_3_1"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><span>X1+</span></td>
+                    <td><input class="sub_3_2" type="number" name="sub_3_2[]" id="sub_3_2"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><span>X2+</span></td>
+                    <td><input class="sub_3_3" type="number" name="sub_3_3[]" id="sub_3_3"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><span>X3+</span></td>
+                    <td><input class="sub_3_4" type="number" name="sub_3_4[]" id="sub_3_4"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><span>X4</span></td>
+                    <td><select class="sub_3_op" name="sub_3_op[]" id="sub_3_op">
                         <option value="min">>=</option>
                         <option value="max"><=</option>
                         <option value="equal">=</option>
                       </select></td>
-                      <td><input type="number" name="sub_1_5" id="sub_1_5" style="width: 50px;height:20px" value="0" /></td>
-                      <td><button type="button" name="add" id="add3" class="btn btn-success">Add More</button></td>
-                      
-                    </tr>
-                  </table>  
-                 <!-- <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />   -->
-                 </div>  
-            </form>  
-            </div>
+                    <td><input class="sub_3_5" type="number" name="sub_3_5[]" id="sub_1_5"
+                        style="width: 50px;height:20px" value="0" /></td>
+                    <td><button type="button" name="add" id="add3" class="btn btn-success">Add More</button></td>
+
+                  </tr>
+                </table>
+              </div>
+            </form>
+          </div>
 
         </div>
         <div>
-          <span>and x >= 0, y>=0;</span><br>
+          <span>and all x_i >= 0;</span><br>
           <input type="checkbox" name="integer_solution" id="integer_solution" placeholder="integer solution"
             value="integer" />
           <span>Return integer result only</span>
@@ -247,57 +263,46 @@
 </body>
 
 </html>
+<!-- dynamic field append and delete script -->
+<script>
+  $(document).ready(function (e) {
+    var i1 = 1;
+    var i2 = 1;
+    var i3 = 1;
+    $('#add1').click(function (e) {
+      i1++;
 
-<script>  
-  $(document).ready(function(e){  
-       var i1=1;
-       var i2=1;
-       var i3=1;  
-         $('#add1').click(function(e){  
-            i1++;  
-            
-            $('#dynamic_field1').append('<tr id="row'+i1+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option><option value="equal">=</option></select></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i1+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-            //$('#dynamic_field2').append('<tr id="row'+i2+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i2+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-            //$('#dynamic_field3').append('<tr id="row'+i3+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3+</span></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><span>X4</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_5" id="sub_1_5" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i3+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-            //$('#dynamic_field4').append('<tr id="row'+i+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3+</span></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><span>X4+</span></td><td><input type="number" name="sub_1_5" id="sub_1_5" style="width: 50px;height:20px" value="0" /></td><td><span>X5</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_6" id="sub_1_6" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-            //$('#dynamic_field5').append('<tr id="row'+i+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3+</span></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><span>X4+</span></td><td><input type="number" name="sub_1_5" id="sub_1_5" style="width: 50px;height:20px" value="0" /></td><td><span>X5+</span></td><td><input type="number" name="sub_1_6" id="sub_1_6" style="width: 50px;height:20px" value="0" /></td><td><span>x6</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_7" id="sub_1_7" style="width: 50px;height:20px" value="0" /></td><td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-          });  
-          $('#add2').click(function(e){  
-              
-            i2++;
-            
-            //$('#dynamic_field1').append('<tr id="row'+i1+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i1+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-            $('#dynamic_field2').append('<tr id="row'+i2+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option><option value="equal">=</option></select></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i2+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-            //$('#dynamic_field3').append('<tr id="row'+i3+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3+</span></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><span>X4</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_5" id="sub_1_5" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i3+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-            //$('#dynamic_field4').append('<tr id="row'+i+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3+</span></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><span>X4+</span></td><td><input type="number" name="sub_1_5" id="sub_1_5" style="width: 50px;height:20px" value="0" /></td><td><span>X5</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_6" id="sub_1_6" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-            //$('#dynamic_field5').append('<tr id="row'+i+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3+</span></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><span>X4+</span></td><td><input type="number" name="sub_1_5" id="sub_1_5" style="width: 50px;height:20px" value="0" /></td><td><span>X5+</span></td><td><input type="number" name="sub_1_6" id="sub_1_6" style="width: 50px;height:20px" value="0" /></td><td><span>x6</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_7" id="sub_1_7" style="width: 50px;height:20px" value="0" /></td><td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-          });  
-          $('#add3').click(function(e){  
-            
-            i3++
-            //$('#dynamic_field1').append('<tr id="row'+i1+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i1+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-           // $('#dynamic_field2').append('<tr id="row'+i2+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i2+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-            $('#dynamic_field3').append('<tr id="row'+i3+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3+</span></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><span>X4</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option><option value="equal">=</option></select></td><td><input type="number" name="sub_1_5" id="sub_1_5" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i3+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-            //$('#dynamic_field4').append('<tr id="row'+i+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3+</span></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><span>X4+</span></td><td><input type="number" name="sub_1_5" id="sub_1_5" style="width: 50px;height:20px" value="0" /></td><td><span>X5</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_6" id="sub_1_6" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-            //$('#dynamic_field5').append('<tr id="row'+i+'"><td><input type="number" name="sub_1_1" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input type="number" name="sub_1_2" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input type="number" name="sub_1_3" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3+</span></td><td><input type="number" name="sub_1_4" id="sub_1_4" style="width: 50px;height:20px" value="0" /></td><td><span>X4+</span></td><td><input type="number" name="sub_1_5" id="sub_1_5" style="width: 50px;height:20px" value="0" /></td><td><span>X5+</span></td><td><input type="number" name="sub_1_6" id="sub_1_6" style="width: 50px;height:20px" value="0" /></td><td><span>x6</span></td><td><select id="sub_1_op"><option value="min">>=</option><option value="max"><=</option>option value="equal">=</option></select></td><td><input type="number" name="sub_1_7" id="sub_1_7" style="width: 50px;height:20px" value="0" /></td><td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>')
-          });  
-          
-       $('#dynamic_field1').on('click', '.btn_remove', function(e){  
-            var button_id = $(this).attr("id");   
-            $('#row'+button_id+'').remove(); 
-            i1--;
-          }); 
-       $('#dynamic_field2').on('click', '.btn_remove', function(e){  
-            var button_id = $(this).attr("id");   
-            $('#row'+button_id+'').remove(); 
-            i2--;
-          }); 
-       $('#dynamic_field3').on('click', '.btn_remove', function(e){  
-            var button_id = $(this).attr("id");   
-            $('#row'+button_id+'').remove();      
-            i3--;
-          }); 
-            
-       });      
-  </script>
-    
+      $('#dynamic_field1').append('<tr id="row' + i1 + '"><td><input class ="sub_1_1" type="number" name="sub_1_1[]" id="sub_1_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input class ="sub_1_2" type="number" name="sub_1_2[]" id="sub_1_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2</span></td><td><select class ="sub_1_op" name = "sub_1_op[]" id="sub_1_op"><option value="min">>=</option><option value="max"><=</option><option value="equal">=</option></select></td><td><input class ="sub_1_3" type="number" name="sub_1_3[]" id="sub_1_3" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="' + i1 + '" class="btn btn-danger btn_remove">X</button></td></tr>')
+    });
+    $('#add2').click(function (e) {
+
+      i2++;
+
+      $('#dynamic_field2').append('<tr id="row' + i2 + '"><td><input class ="sub_2_1" type="number" name="sub_2_1[]" id="sub_2_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input class ="sub_2_2" type="number" name="sub_2_2[]" id="sub_2_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input class ="sub_2_3" type="number" name="sub_2_3[]" id="sub_2_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3</span></td><td><select class ="sub_2_op" name = "sub_2_op[]" id="sub_2_op"><option value="min">>=</option><option value="max"><=</option><option value="equal">=</option></select></td><td><input  class ="sub_2_4" type="number" name="sub_2_4[]" id="sub_2_4" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="' + i2 + '" class="btn btn-danger btn_remove">X</button></td></tr>')
+    });
+    $('#add3').click(function (e) {
+
+      i3++
+      $('#dynamic_field3').append('<tr id="row' + i3 + '"><td><input class ="sub_3_1" type="number" name="sub_3_1[]" id="sub_3_1" style="width: 50px;height:20px" value="0" /></td><td><span>X1+</span></td><td><input class ="sub_3_2" type="number" name="sub_3_2[]" id="sub_3_2" style="width: 50px;height:20px" value="0" /></td><td><span>X2+</span></td><td><input class ="sub_3_3" type="number" name="sub_3_3[]" id="sub_3_3" style="width: 50px;height:20px" value="0" /></td><td><span>X3+</span></td><td><input class ="sub_3_4" type="number" name="sub_3_4[]" id="sub_3_4" style="width: 50px;height:20px" value="0" /></td><td><span>X4</span></td><td><select class ="sub_3_op" name = "sub_3_op[]" id="sub_3_op"><option value="min">>=</option><option value="max"><=</option><option value="equal">=</option></select></td><td><input class ="sub_3_5" type="number" name="sub_3_5[]" id="sub_3_5" style="width: 50px;height:20px" value="0" /></td><td><button type="button" name="remove" id="' + i3 + '" class="btn btn-danger btn_remove">X</button></td></tr>')
+    });
+
+    $('#dynamic_field1').on('click', '.btn_remove', function (e) {
+      var button_id = $(this).attr("id");
+      $('#row' + button_id + '').remove();
+      i1--;
+    });
+    $('#dynamic_field2').on('click', '.btn_remove', function (e) {
+      var button_id = $(this).attr("id");
+      $('#row' + button_id + '').remove();
+      i2--;
+    });
+    $('#dynamic_field3').on('click', '.btn_remove', function (e) {
+      var button_id = $(this).attr("id");
+      $('#row' + button_id + '').remove();
+      i3--;
+    });
+
+  });
+
+
+</script>

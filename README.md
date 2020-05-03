@@ -1,10 +1,12 @@
 # LinearProgram_Solver
-An Everything Website for linear programming. Designed by 3 USC EE students.
+An Everything Website for linear programming with 2 sources: LP-solver and GLPK.
+
+Designed by 3 USC EE students.
 
 ## Linear Programming Introduction
 A technique for the optimization of a linear objective function, subject to linear equality and linear inequality constraints
 ![LP-example](/LP_example.png)
-## What we have done
+## Highlighted features
 
 * Implement the backend by solving linear programs in two different sources: javescript-lp-solver and GLPK
 * Develop frontend webpages by bootstrap4, html, css, containing ellipse, tab and IO user interfaces
@@ -15,24 +17,29 @@ A technique for the optimization of a linear objective function, subject to line
 * Block Generate Button after a single click, to prevent multi-sending request to backend when it's working.
 * Send daily webpage usage email to webpage admin, in order to fully monitor the website
 ![Screenshot1](/screenshot1.png)
-Input for LP-solver
-
-![Screenshot2](/screenshot2.png)
 Input for GLPK
 
-![Screenshot3](/daily_email.png)
-Daily digest for webpage users
+![Screenshot2](/screenshot2.png)
+Input for LP-solver, 2 variables
+
+![Screenshot3](/screenshot3.png)
+Input for LP-solver, 4 variables
+
+![Screenshot4](/daily_email.png)
+Daily report for webpage users
 
 ## Tools we use 
 * Frontend: Bootstrap4, Html, Css, Jquery
 * Backend: Node.js
 * Libraries: express, javascript-lp-solver, GLPK, morgan, nodemailer, fs, shelljs, body-parser
+## Overview of implementation
 
 ## Group members
 Wenhao Cui: wenhaocu@usc.edu <br>
 Tieming Sun: tiemings@usc.edu <br>
 Jiaao Zhu: jiaaozhu@usc.edu
-
+## Link to video
+[click here](https://drive.google.com/a/usc.edu/file/d/1gRFnH6HnPkc7acvQ4Ojpu4zc5DoGjm1c/view?usp=drivesdk)
 ## More about our backend sources
 ### Javasrcipt-lp-solver
 A Node.js based Linear Programming package for real world. [Learn more on LP-solver](https://www.npmjs.com/package/javascript-lp-solver)
@@ -59,3 +66,6 @@ cd backend/
 node app.js
 ```
 Last, open your browser to enjoy this website! http://localhost:3000
+## Future work
+* Add online database for users' log-in / log-out to check Linear Programming function history
+* Deploy the website on [Heroku](https://www.heroku.com/) server

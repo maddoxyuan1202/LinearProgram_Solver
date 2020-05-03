@@ -1,17 +1,25 @@
-/* unblock the chosen division*/
-function showDiv(select)
-{
-  document.getElementById("hidden_div2").style.display = select.value == 2 ? 'block' : 'none';
-  document.getElementById("hidden_div3").style.display = select.value == 3 ? 'block' : 'none';
-  document.getElementById("hidden_div4").style.display = select.value == 4 ? 'block' : 'none';
-  document.getElementById("hidden_div5").style.display = select.value == 5 ? 'block' : 'none';
-  document.getElementById("hidden_div6").style.display = select.value == 6 ? 'block' : 'none';
+/*global variables*/
+var VarNum = 2; //variable number
+var ConNum = 1; //constraint number
+var buffer;  //buffer
+var newC; //constraint name
+var i;   //counter
 
+/* unblock the chosen division*/
+function showDiv(select) {
+  document.getElementById("hidden_div2").style.display =
+    select.value == 2 ? "block" : "none";
+  document.getElementById("hidden_div3").style.display =
+    select.value == 3 ? "block" : "none";
+  document.getElementById("hidden_div4").style.display =
+    select.value == 4 ? "block" : "none";
+  document.getElementById("hidden_div5").style.display =
+    select.value == 5 ? "block" : "none";
+  document.getElementById("hidden_div6").style.display =
+    select.value == 6 ? "block" : "none";
 }
-console.log("1111111");
 /**
  * On click the tab, show one content and hide another one
- * 点击分隔页时，仅显示LP-solver或者GLPK中的一个
  */
 function openLP(evt, choose_solver) {
   // Declare all variables
@@ -35,17 +43,10 @@ function openLP(evt, choose_solver) {
 }
 
 /**
- * Set the initial values of linear programming functions
- * Both GLPK and LP SOlver
+ * Set the initial values of linear programming functions for GLPK
  * Math Prog for GLPK is multi-lined
  */
 function initialize() {
-  document.getElementById("obj_1").value = 3;
-  document.getElementById("obj_2").value = 1;
-  document.getElementById("sub_1_1").value = 2;
-  document.getElementById("sub_1_2").value = -1;
-  document.getElementById("sub_1_3").value = 4;
-
   document.getElementById("input_glpk").value =
     "var x1;\nvar x2;\nmaximize obj: 0.6 * x1 + 0.5 * x2;\ns.t. c1: x1 + 2 * x2 <= 1;\ns.t. c2: 3 * x1 + x2 <= 2;\nsolve;\ndisplay x1, x2;\nend;";
 
@@ -72,119 +73,242 @@ document.getElementById("submit_glpk").onclick = function () {
  * As a package, it requires a JSON as the final input and return an output JSON
  * https://www.npmjs.com/package/javascript-lp-solver
  */
+async function submit_lpsolver() {
+  //check the number of variables
+  buffer = document.getElementById("VaribleNum");
+  VarNum = buffer.options[buffer.selectedIndex].value;
+  //check maximize or minimize
+  let max_or_min = document.getElementById("optimize").value;
+  //check if require integer solution
+  let integer = document.getElementById("integer_solution").checked;
+  //initialize input
+  let input_json = {};
+ 
+  //try to read input constraint
+  try {
+    if (VarNum == 2) {
+      //read objective function constraint
+      let obj_1_1 = document.getElementById("obj_1_1").value;
+      let obj_2_1 = document.getElementById("obj_2_1").value;
+      //read data from dynamic field and put them into an array
+      let sub_1_1 = $(".sub_1_1")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_1_2 = $(".sub_1_2")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_1_3 = $(".sub_1_3")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_1_op = $(".sub_1_op")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      // get length of the array
+      ConNum = sub_1_1.length;
+      //initialize
+      input_json.opType = max_or_min;
+      input_json.optimize = "z";
+      input_json.variables = {
+        x1: {
+          z: obj_1_1,
+        },
+        x2: {
+          z: obj_2_1,
+        },
+      };
+      input_json.constraints = {};
+      //set interger result  
+      if (integer === true) {
+        input_json.ints = { x1: 1, x2: 1 };
+      }
+      //read the constraint and group them into standard jason form
+      for (i = 1; i <= ConNum; i++) {
+        newC = "c" + i;
+        input_json.constraints[newC] = {};
+        input_json.constraints[newC][sub_1_op[i - 1]] = sub_1_3[i - 1];
+        console.log(input_json);
 
-// async function submit_lpsolver() {
-//   console.log("In submit!");
+        input_json.variables.x1[newC] = sub_1_1[i - 1];
+        input_json.variables.x2[newC] = sub_1_2[i - 1];
+      }
+      // three variable case
+    } else if (VarNum == 3) {
+      let obj_1_2 = document.getElementById("obj_1_2").value;
+      let obj_2_2 = document.getElementById("obj_2_2").value;
+      let obj_3_2 = document.getElementById("obj_3_2").value;
+      let sub_2_1 = $(".sub_2_1")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_2_2 = $(".sub_2_2")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_2_3 = $(".sub_2_3")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_2_4 = $(".sub_2_4")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_2_op = $(".sub_2_op")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      ConNum = sub_2_1.length;
+      input_json.opType = max_or_min;
+      input_json.optimize = "z";
+      input_json.variables = {
+        x1: {
+          z: obj_1_2,
+        },
+        x2: {
+          z: obj_2_2,
+        },
+        x3: {
+          z: obj_3_2,
+        },
+      };
+      input_json.constraints = {};
+      if (integer === true) {
+        input_json.ints = { x1: 1, x2: 1, x3: 1 };
+      }
 
-//   // Set the mouse cursor to hourglass
-//   document.body.style.cursor = "wait";
+      for (i = 1; i <= ConNum; i++) {
+        newC = "c" + i;
+        input_json.constraints[newC] = {};
 
-//   // Accessing the div that has random value
-//   let solution_lp = document.getElementById("solution_lp");
+        input_json.constraints[newC][sub_2_op[i - 1]] = sub_2_4[i - 1];
+        input_json.variables.x1[newC] = sub_2_1[i - 1];
+        input_json.variables.x2[newC] = sub_2_2[i - 1];
+        input_json.variables.x3[newC] = sub_2_3[i - 1];
+      }
+      // four variable case
+    } else {
+      let obj_1_3 = document.getElementById("obj_1_3").value;
+      let obj_2_3 = document.getElementById("obj_2_3").value;
+      let obj_3_3 = document.getElementById("obj_3_3").value;
+      let obj_4_3 = document.getElementById("obj_4_3").value;
+      let sub_3_1 = $(".sub_3_1")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_3_2 = $(".sub_3_2")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_3_3 = $(".sub_3_3")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_3_4 = $(".sub_3_4")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_3_5 = $(".sub_3_5")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      let sub_3_op = $(".sub_3_op")
+        .map(function () {
+          return this.value;
+        })
+        .get();
+      ConNum = sub_3_1.length;
+      input_json.opType = max_or_min;
+      input_json.optimize = "z";
+      input_json.variables = {
+        x1: {
+          z: obj_1_3,
+        },
+        x2: {
+          z: obj_2_3,
+        },
+        x3: {
+          z: obj_3_3,
+        },
+        x4: {
+          z: obj_4_3,
+        },
+      };
+      input_json.constraints = {};
+      if (integer === true) {
+        input_json.ints = { x1: 1, x2: 1, x3: 1, x4: 1 };
+      }
 
-//   solution_lp.innerHTML = "Please wait...";
+      for (i = 1; i <= ConNum; i++) {
+        newC = "c" + i;
+        input_json.constraints[newC] = {};
 
-//   // Show the loader element (spinning wheels)
-//   let loader = document.getElementById("loader");
-//   loader.style.display = "inline-block";
-  
-//   try {
-//     let obj_1 = document.getElementById("obj_1").value;
-//     let obj_2 = document.getElementById("obj_2").value;
+        input_json.constraints[newC][sub_3_op[i - 1]] = sub_3_5[i - 1];
+        input_json.variables.x1[newC] = sub_3_1[i - 1];
+        input_json.variables.x2[newC] = sub_3_2[i - 1];
+        input_json.variables.x3[newC] = sub_3_3[i - 1];
+        input_json.variables.x4[newC] = sub_3_4[i - 1];
+      }
+    }
+    // stringify the jason file
+    input_json = JSON.stringify(input_json);
 
-//     let sub_1_1 = document.getElementById("sub_1_1").value;
-//     let sub_1_2 = document.getElementById("sub_1_2").value;
-//     let sub_1_3 = document.getElementById("sub_1_3").value;
-//     let sub_1_op = document.getElementById("sub_1_op").value;
-//     let sub_2_1 = document.getElementById("sub_2_1").value;
-//     let sub_2_2 = document.getElementById("sub_2_2").value;
-//     let sub_2_3 = document.getElementById("sub_2_3").value;
-//     let sub_2_op = document.getElementById("sub_2_op").value;
-//     let sub_3_1 = document.getElementById("sub_3_1").value;
-//     let sub_3_2 = document.getElementById("sub_3_2").value;
-//     let sub_3_3 = document.getElementById("sub_3_3").value;
-//     let sub_3_op = document.getElementById("sub_3_op").value;
-//     let sub_4_1 = document.getElementById("sub_4_1").value;
-//     let sub_4_2 = document.getElementById("sub_4_2").value;
-//     let sub_4_3 = document.getElementById("sub_4_3").value;
-//     let sub_4_op = document.getElementById("sub_4_op").value;
-//     let sub_5_1 = document.getElementById("sub_5_1").value;
-//     let sub_5_2 = document.getElementById("sub_5_2").value;
-//     let sub_5_3 = document.getElementById("sub_5_3").value;
-//     let sub_5_op = document.getElementById("sub_5_op").value;
+    console.log(input_json);
 
-//     let max_or_min = document.getElementById("optimize").value;
-//     let integer = document.getElementById("integer_solution").checked;
-//     let input_json = {};
-//     input_json.opType = max_or_min;
-//     input_json.optimize = "z";
-//     input_json.constraints = {
-//       c1: { [sub_1_op]: sub_1_3 },
-//       c2: { [sub_2_op]: sub_2_3 },
-//       c3: { [sub_3_op]: sub_3_3 },
-//       c4: { [sub_4_op]: sub_4_3 },
-//       c5: { [sub_5_op]: sub_5_3 },
-//     };
-//     input_json.variables = {
-//       x: {
-//         z: obj_1,
-//         c1: sub_1_1,
-//         c2: sub_2_1,
-//         c3: sub_3_1,
-//         c4: sub_4_1,
-//         c5: sub_5_1,
-//       },
-//       y: {
-//         z: obj_2,
-//         c1: sub_1_2,
-//         c2: sub_2_2,
-//         c3: sub_3_2,
-//         c4: sub_4_2,
-//         c5: sub_5_2,
-//       },
-//     };
-//     if (integer === true) {
-//       input_json.ints = { x: 1, y: 1 };
-//     }
-//     input_json = JSON.stringify(input_json);
+    let request_get = `http://127.0.0.1:5000/?model=${input_json}`;
+    console.log("request via HTTP GET method: ", request_get);
+    //let request_post = `http://127.0.0.1:5000/upload`;
+    //console.log("request via HTTP POST method: ", request_post);
 
+    // Send an HTTP GET request to the backend
+    const data = await axios.get(request_get);
+    console.log(data);
 
-//     let request_get = `http://127.0.0.1:5000/?model=${input_json}`;
-//     console.log("request via HTTP GET method: ", request_get);
-//     //let request_post = `http://127.0.0.1:5000/upload`;
-//     //console.log("request via HTTP POST method: ", request_post);
+    // Send an HTTP Post request to the backend
+    //const data1 = await axios.post(request_post, input_json);
+    //console.log(data1);
+    console.log(data.data.output_lp);
+    if (data.data.output_lp.feasible === true) {
+      solution_lp.innerHTML =
+        "Congratulations! We can find a feasible solution. :)" + "<br /><br />";
+    } else {
+      solution_lp.innerHTML =
+        "Sorry, We cannot find a feasible solution. :(" + "<br /><br />";
+    }
 
-//     // Send an HTTP GET request to the backend
-//     const data = await axios.get(request_get);
-//     console.log(data);
+    for (var p in data.data.output_lp) {
+      solution_lp.innerHTML += p + " is " + data.data.output_lp[p] + "<br />";
+    }
+  } catch (error) {
+    console.log("error: ", error);
+  }
 
-//     // Send an HTTP Post request to the backend
-//     //const data1 = await axios.post(request_post, input_json);
-//     //console.log(data1);
-//     console.log(data.data.output_lp);
-//     if (data.data.output_lp.feasible === true) {
-//       solution_lp.innerHTML =
-//         "Congratulations! We can find a feasible solution. :)" + "<br /><br />";
-//     } else {
-//       solution_lp.innerHTML =
-//         "Sorry, We cannot find a feasible solution. :(" + "<br /><br />";
-//     }
+  // Set the cursor back to default
+  document.body.style.cursor = "default";
 
-//     for (var p in data.data.output_lp) {
-//       solution_lp.innerHTML += p + " is " + data.data.output_lp[p] + "<br />";
-//     }
-//   } catch (error) {
-//     console.log("error: ", error);
-//   }
-
-//   // Set the cursor back to default
-//   document.body.style.cursor = "default";
-
-//   // Hide loader animation
-//   loader.style.display = "none";
-// }
-
-// This function is to send the math program in text area to the backend
+  // Hide loader animation
+  loader.style.display = "none";
+}
+//---------------------------------------------------
+/**
+ * This async function is to send the math program from text area to the backend
+ */
 async function submit_glpk() {
   console.log("In submit!");
 
