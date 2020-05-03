@@ -10,6 +10,8 @@ try {
 }
 
 // Testing GLPK
+//First run the backend with the eaxmple we offered in frontend then cmpare the created
+//file with the test.txt file.
 describe("glpk Test with Mocha", () => {
   it("should work", () => {
     assert.equal(myLib.output_lp_glpk(), output_lp);
