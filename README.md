@@ -9,7 +9,7 @@ A technique for the optimization of a linear objective function, subject to line
 ## Highlighted features
 
 * Two different sources: javescript-lp-solver and GLPK
-* Develop frontend webpages by bootstrap4, html, css, containing ellipse, tab and IO user interfaces
+* Develop frontend webpages by bootstrap4, html, css, containing collapse, tab and IO user interfaces
 * Relying on Javscript-LP-sovler to generate solution, using Express library to send HTTP Get request from frontend to backend, by parsing input into a JSON
 * Generate dynamic input for LP-solver webpage, which enables users to choose up to 4 variables for a linear program
 * Wrapped GLPK, a GNU based library, into Node.js backend, and use Express library to send HTTP Post request via async function 
@@ -36,7 +36,7 @@ Daily report for webpage users
 ### Frontend
 * Jquery library: Create append and delete functions to dynamicaly allocate input field.
 * ShowDiv function to hide and reveal the number of variables selected by the user
-* Bootstrap and Javascript: generate collepse and tab for webpage
+* Bootstrap and Javascript: generate collapse and tab for webpage
 ### Backend
 * Express Library: HTTP Get Request to listen input_json from localhost:3000, return output to frontend
 * Express Library: HTTP Post Request to receive MathProg, save as text file and call GLPK using shell.js, then return output file to frontend
