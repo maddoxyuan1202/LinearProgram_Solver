@@ -51,7 +51,7 @@ Jiaao Zhu: jiaaozhu@usc.edu
 ### Javasrcipt-lp-solver
 A Node.js based Linear Programming package for real world. [Learn more on LP-solver](https://www.npmjs.com/package/javascript-lp-solver)
 ### GLPK
-An open Source Library written in C, which is a GNU based library dealing with Linear Programs, we wrapped it into our Node.js backend [Learn more on LP-solver](https://www.gnu.org/software/glpk/)
+An open Source Library written in C, which is a GNU based library dealing with Linear Programs, we wrapped it into our Node.js backend [Learn more on GLPK](https://www.gnu.org/software/glpk/)
 
 ## Simple steps to run this repo
 Clone this repo into your computer.
